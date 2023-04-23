@@ -1,0 +1,7 @@
+numpy
+fire
+transformers
+torch
+sentencepiece
+tokenizers>=0.13.3
+GitPython
