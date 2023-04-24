@@ -173,3 +173,5 @@ If you wish to cite this project, please use:
   howpublished = {\url{https://github.com/minosvasilias/godot-dodo}},
 }
 ```
+
+You should also cite the [original LLaMA paper](https://arxiv.org/abs/2302.13971) as well as [stanford-alpaca](https://github.com/tatsu-lab/stanford_alpaca).
