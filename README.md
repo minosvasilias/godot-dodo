@@ -116,9 +116,9 @@ To test out your finetuned model, you can use the `eval.py` script. Simply run:
 python finetune/eval.py --model_name_or_path PATH_TO_FINETUNED_MODEL/
 ```
 
-## Publishing to Huggingface
+## Publishing to Hugging Face
 
-To easily upload a finetuned model to Huggingface, you can use:
+To easily upload a finetuned model to Hugging Face, you can use:
 
 ```bash
 python finetune/push_to_hub.py --model_name_or_path PATH_TO_FINETUNED_MODEL/ --push_name HF_MODEL_NAME --auth_token HF_ACCESS_TOKEN
@@ -126,7 +126,7 @@ python finetune/push_to_hub.py --model_name_or_path PATH_TO_FINETUNED_MODEL/ --p
 
 ## Finetuned model weights
 
-Links to model weights hosted on Huggingface are provided in the respective model pages:
+Links to model weights hosted on Hugging Face are provided in the respective model pages:
 
 -   [models/godot_dodo_4x_60k_llama_7b](models/godot_dodo_4x_60k_llama_7b)
 -   [models/godot_dodo_4x_60k_llama_13b](models/godot_dodo_4x_60k_llama_13b)
