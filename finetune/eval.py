@@ -125,8 +125,6 @@ def initialize_model():
     )
 
 def run_evals():
-    initialize_model()
-    
     generation_config = GenerationConfig(
         temperature=0.1,
         top_p=0.75,
@@ -198,6 +196,7 @@ def run_interface():
     g.launch()
 
 if __name__ == "__main__":
+    initialize_model()
     if inference_args.launch_gradio:
         run_interface()
     else:
