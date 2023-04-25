@@ -6,3 +6,5 @@ sentencepiece
 tokenizers>=0.13.3
 GitPython
 gradio
+accelerate
+bitsandbytes

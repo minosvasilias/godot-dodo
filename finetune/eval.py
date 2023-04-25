@@ -100,6 +100,7 @@ def initialize_model():
         model_args.model_name_or_path,
         load_in_8bit=inference_args.load_in_8bit,
         torch_dtype=inference_args.inference_dtype,
+        device_map="auto"
     )
     model = model.to("cuda")
     model.eval()
