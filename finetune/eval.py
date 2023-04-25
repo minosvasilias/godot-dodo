@@ -75,8 +75,8 @@ class InferenceArguments:
         default=False,
         metadata={"help": "Load the model in 8-bit mode."},
     )
-    inference_dtype: torch.dtype = field(
-        default=torch.float32,
+    inference_dtype: str = field(
+        default="float32",
         metadata={"help": "The dtype to use for inference."},
     )
     launch_gradio: bool = field(
@@ -99,7 +99,7 @@ def initialize_model():
     model = transformers.AutoModelForCausalLM.from_pretrained(
         model_args.model_name_or_path,
         load_in_8bit=inference_args.load_in_8bit,
-        torch_dtype=inference_args.inference_dtype,
+        torch_dtype=torch.float16 if inference_args.inference_dtype == "float16" else torch.float32,
         device_map="auto"
     )
     model = model.to("cuda")
