@@ -91,6 +91,7 @@ def generate_prompt(instruction, input=None):
 
 
 def initialize_model():
+    print("Initializing model with args: ", inference_args)
     global model, tokenizer, inference_args
     parser = transformers.HfArgumentParser(
         (ModelArguments, InferenceArguments))
