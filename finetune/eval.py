@@ -152,7 +152,7 @@ def get_completion(generation_config, max_length, instruction):
     input_length = 1 if model.config.is_encoder_decoder else inputs.input_ids.shape[
         1]
     generated_tokens = outputs.sequences[:, input_length:]
-    return tokenizer.decode(generated_tokens[0])
+    return tokenizer.decode(generated_tokens[0]).replace(DEFAULT_EOS_TOKEN, "")
 
 
 def gradio_inference(
