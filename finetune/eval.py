@@ -4,6 +4,7 @@ import numpy as np
 import torch
 import transformers
 from transformers import GenerationConfig
+import gradio as gr
 
 from train import ModelArguments, smart_tokenizer_and_embedding_resize, DEFAULT_PAD_TOKEN, DEFAULT_EOS_TOKEN, \
     DEFAULT_BOS_TOKEN, DEFAULT_UNK_TOKEN, PROMPT_TEMPLATE
@@ -74,9 +75,14 @@ class InferenceArguments:
         default=False,
         metadata={"help": "Load the model in 8-bit mode."},
     )
-    inference_dtype: torch.dtype = field(
-        default=torch.float32,
+    inference_dtype: str = field(
+        default="float32",
         metadata={"help": "The dtype to use for inference."},
+    )
+    launch_gradio: bool = field(
+        default=False,
+        metadata={
+            "help": "Whether to use user input for prompting or a fixed eval list."},
     )
 
 
@@ -84,27 +90,22 @@ def generate_prompt(instruction, input=None):
     return PROMPT_TEMPLATE.format(instruction=instruction)
 
 
-def inference():
+def initialize_model():
+    global model, tokenizer, inference_args
     parser = transformers.HfArgumentParser(
         (ModelArguments, InferenceArguments))
     model_args, inference_args = parser.parse_args_into_dataclasses()
-
-    device = torch.device("cuda")
+    print("Initializing model with args: ", inference_args)
 
     model = transformers.AutoModelForCausalLM.from_pretrained(
         model_args.model_name_or_path,
         load_in_8bit=inference_args.load_in_8bit,
-        torch_dtype=inference_args.inference_dtype,
+        torch_dtype=torch.float16 if inference_args.inference_dtype == "float16" else torch.float32,
+        device_map="auto"
     )
-    # model.cuda()
-    model = model.to("cuda")
+    if not inference_args.load_in_8bit:
+        model.to("cuda")
     model.eval()
-
-    generation_config = GenerationConfig(
-        temperature=0.1,
-        top_p=0.75,
-        num_beams=4,
-    )
 
     tokenizer = transformers.AutoTokenizer.from_pretrained(
         model_args.model_name_or_path,
@@ -126,19 +127,81 @@ def inference():
         }
     )
 
+def run_evals():
+    generation_config = GenerationConfig(
+        temperature=0.1,
+        top_p=0.75,
+        num_beams=4,
+    )
+
     for instruction in eval_instructions:
         print("Instruction:\n%s\n\n" % instruction)
-        inputs = tokenizer(generate_prompt(
-            instruction, None), return_tensors="pt")
+        print("Response:\n%s\n\n\n" %
+                get_completion(generation_config, inference_args.model_max_length, instruction))
+
+
+def get_completion(generation_config, max_length, instruction):
+    inputs = tokenizer(generate_prompt(
+        instruction, None), return_tensors="pt")
+    with torch.no_grad():
         outputs = model.generate(input_ids=inputs["input_ids"].to("cuda"),
-                                 generation_config=generation_config,
-                                 max_new_tokens=inference_args.model_max_length,
-                                 return_dict_in_generate=True,
-                                 output_scores=True)
-        input_length = 1 if model.config.is_encoder_decoder else inputs.input_ids.shape[1]
-        generated_tokens = outputs.sequences[:, input_length:]
-        print("Response:\n%s\n\n\n" % tokenizer.decode(generated_tokens[0]))
+                                generation_config=generation_config,
+                                max_new_tokens=max_length,
+                                return_dict_in_generate=True,
+                                output_scores=True)
+    input_length = 1 if model.config.is_encoder_decoder else inputs.input_ids.shape[
+        1]
+    generated_tokens = outputs.sequences[:, input_length:]
+    return tokenizer.decode(generated_tokens[0]).replace(DEFAULT_EOS_TOKEN, "")
+
+
+def gradio_inference(
+    instruction,
+    temperature=0.1,
+    top_p=0.75,
+    num_beams=4,
+    max_new_tokens=512,
+    **kwargs,
+):
+    generation_config = GenerationConfig(
+        temperature=temperature,
+        top_p=top_p,
+        num_beams=num_beams,
+    )
+    return get_completion(generation_config, max_new_tokens, instruction)
+
+
+def run_interface():
+    g = gr.Interface(
+        fn=gradio_inference,
+        inputs=[
+            gr.components.Textbox(
+                lines=2, label="Instruction", placeholder="Return the sum of two integers."
+            ),
+            gr.components.Slider(minimum=0, maximum=1,
+                                 value=0.1, label="Temperature"),
+            gr.components.Slider(minimum=0, maximum=1,
+                                 value=0.75, label="Top p"),
+            gr.components.Slider(minimum=1, maximum=4, step=1,
+                                 value=4, label="Beams"),
+            gr.components.Slider(minimum=1, maximum=512, step=1, value=128, label="Max tokens"),
+        ],
+        outputs=[
+            gr.inputs.Textbox(
+                lines=5,
+                label="Output",
+            )
+        ],
+        title="🦤 godot-dodo",
+        description="godot-dodo is a set of language models finetuned on open-source Godot projects for the purpose of GDScript generation. Further info available in [the GitHub repository](https://github.com/minosvasilias/godot-dodo).",
+    )
+    g.queue(concurrency_count=1)
+    g.launch(share=True)
 
 
 if __name__ == "__main__":
-    inference()
+    initialize_model()
+    if inference_args.launch_gradio:
+        run_interface()
+    else:
+        run_evals()
