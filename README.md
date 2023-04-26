@@ -38,6 +38,12 @@ Less widely used languages are underrepresented in the training data and experie
 
 This aims to provide much more robust language-specific models that can be used to reliably generate code that compiles on first try.
 
+## Demo
+
+To try out the pre-trained models, you can use the [inference_demo.ipynb](demo/inference_demo.ipynb) notebook.
+
+In order to use that notebook on Google Colab, follow [this link](https://colab.research.google.com/github/minosvasilias/godot-dodo/blob/main/inference_demo.ipynb).
+
 ## Dataset Generation
 
 Due to this approach relying on human-created data, we scrape GitHub repositories using the GitHub search API.
