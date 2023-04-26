@@ -91,11 +91,11 @@ def generate_prompt(instruction, input=None):
 
 
 def initialize_model():
-    print("Initializing model with args: ", inference_args)
     global model, tokenizer, inference_args
     parser = transformers.HfArgumentParser(
         (ModelArguments, InferenceArguments))
     model_args, inference_args = parser.parse_args_into_dataclasses()
+    print("Initializing model with args: ", inference_args)
 
     model = transformers.AutoModelForCausalLM.from_pretrained(
         model_args.model_name_or_path,
