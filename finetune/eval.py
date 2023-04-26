@@ -196,7 +196,8 @@ def run_interface():
         description="godot-dodo is a set of language models finetuned on open-source Godot projects for the purpose of GDScript generation. Further info available in [the GitHub repository](https://github.com/minosvasilias/godot-dodo).",
     )
     g.queue(concurrency_count=1)
-    g.launch()
+    g.launch(share=True)
+
 
 if __name__ == "__main__":
     initialize_model()
