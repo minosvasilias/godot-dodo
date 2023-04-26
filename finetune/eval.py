@@ -102,7 +102,7 @@ def initialize_model():
         torch_dtype=torch.float16 if inference_args.inference_dtype == "float16" else torch.float32,
         device_map="auto"
     )
-    model = model.to("cuda")
+    model.to("cuda")
     model.eval()
 
     tokenizer = transformers.AutoTokenizer.from_pretrained(
