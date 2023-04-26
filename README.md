@@ -42,7 +42,7 @@ This aims to provide much more robust language-specific models that can be used 
 
 To try out the pre-trained models, you can use the [inference_demo.ipynb](demo/inference_demo.ipynb) notebook.
 
-In order to use that notebook on Google Colab, follow [this link](https://colab.research.google.com/github/minosvasilias/godot-dodo/blob/main/inference_demo.ipynb).
+In order to use that notebook on Google Colab, follow [this link](https://colab.research.google.com/github/minosvasilias/godot-dodo/blob/main/demo/inference_demo.ipynb).
 
 ## Dataset Generation
 
