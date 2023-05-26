@@ -8,11 +8,11 @@ In this case, the targeted language is GDScript, but the same methodology can be
 
 This repository includes the following:
 
--   Scripts to assemble the finetuning dataset
--   Pre-assembled, raw datasets (up to a size of 60k rows)
--   Scripts to finetune a model
--   Links to model weights
--   Performance report comparing finetuned models
+- Scripts to assemble the finetuning dataset
+- Pre-assembled, raw datasets (up to a size of 60k rows)
+- Scripts to finetune a model
+- Links to model weights
+- Performance report comparing finetuned models
 
 ## Performance
 
@@ -20,7 +20,9 @@ This repository includes the following:
 
 **For comprehensive results explaining the methodology used and a full list of all result, please refer to the full performance report [here](models/).**
 
-In summary, `godot_dodo` models achieve significantly greater consistency than `gpt-4`/`gpt-3.5-turbo` when it comes to generating accurate GDScript syntax, but are somewhat less capable of following complex instructions.
+In summary, `godot_dodo` models achieve significantly greater consistency than `gpt-4`/`gpt-3.5-turbo` when it comes to generating accurate GDScript syntax, and variants trained on code-specific base-models can even outperform them on complex instructions.
+
+The major remaining weakpoint of this approach is the loss in appropriate verbosity when writing methods. Since human-written samples will often include references to objects initialized outside of the scope of the sample method, the model learns to do the same, resulting in cases where functionality relevant to the instruction is assumed to be already implemented. This can most likely be improved significantly by a more sophisticated dataset.
 
 ## Concept
 
@@ -54,12 +56,12 @@ We also use `license:mit` to limit the dataset to suitable repositories. **Only 
 
 We then clone each one and apply the following logic:
 
--   Find `project.godot` file
--   Detect whether project is made for `3.x` or `4.x` Godot engine versions
--   Iterate through all `.gd` files found in the repository
--   For each one, split file into individual functions
--   For each function found, ask existing LLM (`gpt-3.5-turbo`) for a detailed comment describing the functions purpose
--   Add `instruction:response` data pair to dataset
+- Find `project.godot` file
+- Detect whether project is made for `3.x` or `4.x` Godot engine versions
+- Iterate through all `.gd` files found in the repository
+- For each one, split file into individual functions
+- For each function found, ask existing LLM (`gpt-3.5-turbo`) for a detailed comment describing the functions purpose
+- Add `instruction:response` data pair to dataset
 
 Note that existing, human-written comments located above the code-block are not used for the `instruction` value. We are interested in consistent detail for comments, rather than trying to preserve some potentially higher-quality human-written ones.
 
@@ -69,8 +71,8 @@ Human comments within the code block however are preserved.
 
 To assemble a dataset yourself, follow these instructions:
 
--   Run `python data/generate_unlabeled_dataset.py`
--   Run `python data/label_dataset.py`
+- Run `python data/generate_unlabeled_dataset.py`
+- Run `python data/label_dataset.py`
 
 Please do note that you'll need GitHub and OpenAI API keys in order to use these scripts.
 
@@ -78,8 +80,8 @@ Please do note that you'll need GitHub and OpenAI API keys in order to use these
 
 Pre-assembled datasets included in this repository:
 
--   [godot_dodo_4x_60k](data/godot_dodo_4x_60k/)
-    -   Assembled using `4.x` Godot projects - ~60k rows
+- [godot_dodo_4x_60k](data/godot_dodo_4x_60k/)
+  - Assembled using `4.x` Godot projects - ~60k rows
 
 Further datasets may be added in the future (particularly regarding `3.x` data)
 
@@ -111,8 +113,8 @@ pip install -r requirements.txt
 
 For exact commands used for finetuning models, please refer to the individual model pages:
 
--   [models/godot_dodo_4x_60k_llama_7b](models/godot_dodo_4x_60k_llama_7b)
--   [models/godot_dodo_4x_60k_llama_13b](models/godot_dodo_4x_60k_llama_13b)
+- [models/godot_dodo_4x_60k_llama_7b](models/godot_dodo_4x_60k_llama_7b)
+- [models/godot_dodo_4x_60k_llama_13b](models/godot_dodo_4x_60k_llama_13b)
 
 ## Inference
 
@@ -134,8 +136,8 @@ python finetune/push_to_hub.py --model_name_or_path PATH_TO_FINETUNED_MODEL/ --p
 
 Links to model weights hosted on Huggingface are provided in the respective model pages:
 
--   [models/godot_dodo_4x_60k_llama_7b](models/godot_dodo_4x_60k_llama_7b)
--   [models/godot_dodo_4x_60k_llama_13b](models/godot_dodo_4x_60k_llama_13b)
+- [models/godot_dodo_4x_60k_llama_7b](models/godot_dodo_4x_60k_llama_7b)
+- [models/godot_dodo_4x_60k_llama_13b](models/godot_dodo_4x_60k_llama_13b)
 
 ## Cost
 
@@ -143,15 +145,15 @@ Below the dollar-cost of assembling each available dataset and finetuning each m
 
 ### Datasets
 
--   [godot_dodo_4x_60k](data/godot_dodo_4x_60k/)
-    -   `30$` (`gpt-3.5-turbo` API costs)
+- [godot_dodo_4x_60k](data/godot_dodo_4x_60k/)
+  - `30$` (`gpt-3.5-turbo` API costs)
 
 ### Finetuned Models
 
--   [models/godot_dodo_4x_60k_llama_7b](models/godot_dodo_4x_60k_llama_7b)
-    -   `24$` (8x A100 80GB instance costs)
--   [models/godot_dodo_4x_60k_llama_13b](models/godot_dodo_4x_60k_llama_13b)
-    -   `84$`(8x A100 80GB instance costs)
+- [models/godot_dodo_4x_60k_llama_7b](models/godot_dodo_4x_60k_llama_7b)
+  - `24$` (8x A100 80GB instance costs)
+- [models/godot_dodo_4x_60k_llama_13b](models/godot_dodo_4x_60k_llama_13b)
+  - `84$`(8x A100 80GB instance costs)
 
 ## Use with godot-copilot
 
