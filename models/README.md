@@ -10,14 +10,20 @@ The same list of prompts was given to all models, and their first response used.
 
 We will be comparing:
 
--   `gpt-3.5-turbo`
-    -   By OpenAI
--   `gpt-4`
-    -   By OpenAI
--   `godot_dodo_4x_60k_llama_7b`
-    -   Finetune of `llama_7b` trained on the [godot_dodo_4x_60k](../data/godot_dodo_4x_60k/) dataset.
--   `godot_dodo_4x_60k_llama_13b`
-    -   Finetune of `llama_13b` trained on the [godot_dodo_4x_60k](../data/godot_dodo_4x_60k/) dataset.
+- `gpt-3.5-turbo`
+  - By OpenAI
+- `gpt-4`
+  - By OpenAI
+- `godot_dodo_4x_60k_llama_7b`
+  - Finetune of `llama_7b` trained on the [godot_dodo_4x_60k](../data/godot_dodo_4x_60k/) dataset.
+- `godot_dodo_4x_60k_llama_13b`
+  - Finetune of `llama_13b` trained on the [godot_dodo_4x_60k](../data/godot_dodo_4x_60k/) dataset.
+- `godot_dodo_4x_60k_starcoder_15b_1ep`
+  - Finetune of `starcoder` trained for 1 epoch on the [godot_dodo_4x_60k](../data/godot_dodo_4x_60k/) dataset.
+- `godot_dodo_4x_60k_starcoder_15b_2ep`
+  - Finetune of `starcoder` trained for 2 epochs on the [godot_dodo_4x_60k](../data/godot_dodo_4x_60k/) dataset.
+- `godot_dodo_4x_60k_starcoder_15b_3ep`
+  - Finetune of `starcoder` trained for 3 epochs on the [godot_dodo_4x_60k](../data/godot_dodo_4x_60k/) dataset.
 
 All prompts are injected into the same template:
 
@@ -36,12 +42,12 @@ For OpenAI's chat-based models, `### Response:` is removed from the prompt.
 
 **Responses are scored on the following metrics:**
 
--   **Syntax**
-    -   Scores whether or not the returned code compiles successfully and throws no errors when executed. References to user-made methods are allowed and will be amended to the script before evaluation.
--   **Functionality**
-    -   Scores whether or not the instructions were followed and the code, regardless of syntax issues, describes the necessary logic.
--   **Verbosity**
-    -   Scores whether or not the code efficiently implements the instructions. Code that adds unnecessary logic fails due to being too verbose, and code that relies on unimplemented methods not native to the engine in order for the logic to execute successfully fails for not being verbose enough.
+- **Syntax**
+  - Scores whether or not the returned code compiles successfully and throws no errors when executed. References to user-made methods are allowed and will be amended to the script before evaluation.
+- **Functionality**
+  - Scores whether or not the instructions were followed and the code, regardless of syntax issues, describes the necessary logic.
+- **Verbosity**
+  - Scores whether or not the code efficiently implements the instructions. Code that adds unnecessary logic fails due to being too verbose, and code that relies on unimplemented methods not native to the engine in order for the logic to execute successfully fails for not being verbose enough.
 
 Below the final scores of all compared models:
 
@@ -51,38 +57,53 @@ In plaintext:
 
 #### Syntax:
 
--   `gpt-3.5-turbo`: 24
--   `gpt-4`: 19
--   `godot_dodo_4x_60k_llama_7b`: 36
--   `godot_dodo_4x_60k_llama_13b`: 33
+- `godot_dodo_4x_60k_starcoder_15b_2ep`: 45
+- `godot_dodo_4x_60k_starcoder_15b_3ep`: 43
+- `godot_dodo_4x_60k_starcoder_15b_1ep`: 39
+- `godot_dodo_4x_60k_llama_7b`: 36
+- `godot_dodo_4x_60k_llama_13b`: 33
+- `gpt-3.5-turbo`: 24
+- `gpt-4`: 19
 
 #### Functionality:
 
--   `gpt-3.5-turbo`: 39
--   `gpt-4`: 41
--   `godot_dodo_4x_60k_llama_7b`: 31
--   `godot_dodo_4x_60k_llama_13b`: 30
+- `gpt-3.5-turbo`: 39
+- `gpt-4`: 41
+- `godot_dodo_4x_60k_starcoder_15b_1ep`: 33
+- `godot_dodo_4x_60k_starcoder_15b_3ep`: 33
+- `godot_dodo_4x_60k_starcoder_15b_2ep`: 31
+- `godot_dodo_4x_60k_llama_7b`: 30
+- `godot_dodo_4x_60k_llama_13b`: 30
 
 #### Verbosity:
 
--   `gpt-3.5-turbo`: 39
--   `gpt-4`: 39
--   `godot_dodo_4x_60k_llama_7b`: 26
--   `godot_dodo_4x_60k_llama_13b`:25
+- `gpt-3.5-turbo`: 39
+- `gpt-4`: 39
+- `godot_dodo_4x_60k_starcoder_15b_1ep`: 38
+- `godot_dodo_4x_60k_starcoder_15b_2ep`: 33
+- `godot_dodo_4x_60k_starcoder_15b_3ep`: 30
+- `godot_dodo_4x_60k_llama_7b`: 26
+- `godot_dodo_4x_60k_llama_13b`:25
 
 #### Total Points:
 
--   `gpt-3.5-turbo`: 102
--   `gpt-4`: 99
--   `godot_dodo_4x_60k_llama_7b`: 93
--   `godot_dodo_4x_60k_llama_13b`:88
+- `godot_dodo_4x_60k_starcoder_15b_1ep`: 110
+- `godot_dodo_4x_60k_starcoder_15b_2ep`: 109
+- `godot_dodo_4x_60k_starcoder_15b_3ep`: 106
+- `gpt-3.5-turbo`: 102
+- `gpt-4`: 99
+- `godot_dodo_4x_60k_llama_7b`: 93
+- `godot_dodo_4x_60k_llama_13b`:88
 
-#### Perfect responses:
+#### Flawless responses:
 
--   `gpt-3.5-turbo`: 20
--   `gpt-4`: 18
--   `godot_dodo_4x_60k_llama_7b`: 15
--   `godot_dodo_4x_60k_llama_13b`: 16
+- `godot_dodo_4x_60k_starcoder_15b_2ep`: 23
+- `godot_dodo_4x_60k_starcoder_15b_3ep`: 21
+- `gpt-3.5-turbo`: 20
+- `godot_dodo_4x_60k_starcoder_15b_1ep`: 19
+- `gpt-4`: 18
+- `godot_dodo_4x_60k_llama_7b`: 15
+- `godot_dodo_4x_60k_llama_13b`: 16
 
 ## Responses
 
@@ -137,6 +158,51 @@ func add(a: int, b: int) -> int:
 
 ```gdscript
 func add(a: int, b :int) -> int:
+        return a + b
+```
+
+```diff
++ Syntax correct
+
++ Functionality correct
+
++ Verbosity good
+```
+
+#### godot_dodo_4x_60k_starcoder_15b_3ep
+
+```gdscript
+func add(a: int, b :int) -> int:
+        return a + b
+```
+
+```diff
++ Syntax correct
+
++ Functionality correct
+
++ Verbosity good
+```
+
+#### godot_dodo_4x_60k_starcoder_15b_2ep
+
+```gdscript
+func add(a: int, b :int) -> int:
+        return a + b
+```
+
+```diff
++ Syntax correct
+
++ Functionality correct
+
++ Verbosity good
+```
+
+#### godot_dodo_4x_60k_starcoder_15b_1ep
+
+```gdscript
+func sum(a: int, b: int) -> int:
         return a + b
 ```
 
@@ -259,6 +325,77 @@ func _input(event):
 ! Calling non-engine functions
 ```
 
+#### godot_dodo_4x_60k_starcoder_15b_3ep
+
+```gdscript
+func _process(delta):
+        if Input.is_action_pressed("w"):
+                translate(Vector3(0, 0, -speed) * delta)
+        if Input.is_action_pressed("a"):
+                translate(Vector3(-speed, 0, 0) * delta)
+        if Input.is_action_pressed("s"):
+                translate(Vector3(0, 0, speed) * delta)
+        if Input.is_action_pressed("d"):
+                translate(Vector3(speed, 0, 0) * delta)
+```
+
+```diff
++ Syntax correct
+
++ Functionality correct
+
++ Verbosity good
+```
+
+#### godot_dodo_4x_60k_starcoder_15b_2ep
+
+```gdscript
+func _input(event):
+        if event is InputEventKey and event.pressed:
+                match event.keycode:
+                        KEY_W:
+                                global_position.y -= 1
+                        KEY_A:
+                                global_position.x -= 1
+                        KEY_S:
+                                global_position.y += 1
+                        KEY_D:
+                                global_position.x += 1
+```
+
+```diff
++ Syntax correct
+
++ Functionality correct
+
++ Verbosity good
+```
+
+#### godot_dodo_4x_60k_starcoder_15b_1ep
+
+```gdscript
+func _input(event):
+        if event is InputEventKey:
+                if event.pressed:
+                        match event.keycode:
+                                KEY_W:
+                                        global_translate(Vector3(0, 0, -1))
+                                KEY_A:
+                                        global_translate(Vector3(-1, 0, 0))
+                                KEY_S:
+                                        global_translate(Vector3(0, 0, 1))
+                                KEY_D:
+                                        global_translate(Vector3(1, 0, 0))
+```
+
+```diff
++ Syntax correct
+
++ Functionality correct
+
++ Verbosity good
+```
+
 ---
 
 ### Apply a new metallic spatial material with a red albedo color.
@@ -355,6 +492,67 @@ func _get_description() -> String:
 
 - Verbosity bad
 ! Too short for useful logic
+```
+
+#### godot_dodo_4x_60k_starcoder_15b_3ep
+
+```gdscript
+func _ready():
+        super._ready()
+        metallic_spatial_material.albedo_color = Color.RED
+        apply_material(metallic_spatial_material)
+```
+
+```diff
++ Syntax correct
+
+- Functionality incorrect
+! Does not create a new material
+
+- Verbosity bad
+! Assumes material is already metallic
+! Assumes non-engine apply_material method
+! Unneeded super call
+```
+
+#### godot_dodo_4x_60k_starcoder_15b_2ep
+
+```gdscript
+func _ready() -> void:
+        super()
+        _set_metallic_spatial_material()
+        albedo_color = Color.RED
+```
+
+```diff
+- Syntax incorrect
+! albedo_color does not exist on any Node class
+
+- Functionality incorrect
+! does not create new material
+
+- Verbosity bad
+! Assumes non-engine _set_metallic_spatial_material method
+! Unneeded super call
+```
+
+#### godot_dodo_4x_60k_starcoder_15b_1ep
+
+```gdscript
+func _update_material() -> void:
+        material = SpatialMaterial3D.new()
+        material.albedo_color = Color.RED
+        material.metallic = 1.0
+```
+
+```diff
+- Syntax incorrect
+! SpatialMaterial3D does not exist (should be StandardMaterial3D)
+
+- Functionality incorrect
+! Does not attempt to apply material
+
++ Verbosity good
 ```
 
 ---
@@ -454,6 +652,67 @@ func get_content_between_curly_brackets(line: String) -> PackedStringArray:
 ! Too short, no useful logic
 ```
 
+#### godot_dodo_4x_60k_starcoder_15b_3ep
+
+```gdscript
+func get_all_content_in_brackets(string:String) -> PackedStringArray:
+        var regex = RegEx.new()
+        regex.compile('{(.+?)}')
+        var results = PackedStringArray()
+        for result in regex.search_all(string):
+                results.append(result.get_string())
+        return results
+```
+
+```diff
++ Syntax correct
+
++ Functionality correct
+
++ Verbosity good
+```
+
+#### godot_dodo_4x_60k_starcoder_15b_2ep
+
+```gdscript
+func get_all_content_in_brackets(string: String) -> PackedStringArray:
+        var regex = RegEx.new()
+        regex.compile("\\{(.+?)\\}")
+        var results = PackedStringArray()
+        for result in regex.search_all(string):
+                results.append(result.get_string())
+        return results
+```
+
+```diff
++ Syntax correct
+
++ Functionality correct
+
++ Verbosity good
+```
+
+#### godot_dodo_4x_60k_starcoder_15b_1ep
+
+```gdscript
+func get_content_in_brackets(string: String) -> Array:
+        var regex = RegEx.new()
+        regex.compile("\\{(?<content>.*?)\\}")
+        var results = regex.search_all(string)
+        var contents = []
+        for result in results:
+                contents.append(result.get_string("content"))
+        return contents
+```
+
+```diff
++ Syntax correct
+
++ Functionality correct
+
++ Verbosity good
+```
+
 ---
 
 ### Move camera towards target_position each frame. Make sure camera movement is smooth.
@@ -551,6 +810,53 @@ func _process(delta):
 ! Not attempt to implement movement logic
 ```
 
+#### godot_dodo_4x_60k_starcoder_15b_3ep
+
+```gdscript
+func _process(delta):
+        if target_position:
+                global_position = lerp(global_position, target_position, 10 * delta)
+```
+
+```diff
++ Syntax correct
+
++ Functionality correct
+
++ Verbosity good
+```
+
+#### godot_dodo_4x_60k_starcoder_15b_2ep
+
+```gdscript
+func _process(delta):
+        if target_position:
+                global_position = lerp(global_position, target_position, 10 * delta)
+```
+
+```diff
++ Syntax correct
+
++ Functionality correct
+
++ Verbosity good
+```
+
+#### godot_dodo_4x_60k_starcoder_15b_1ep
+
+```gdscript
+func _physics_process(delta: float) -> void:
+        camera.global_position = camera.global_position.move_toward(target_position, camera_speed * delta)
+```
+
+```diff
++ Syntax correct
+
++ Functionality correct
+
++ Verbosity good
+```
+
 ---
 
 ### Recursively find all child nodes of the input node and print the node path of each one.
@@ -617,6 +923,61 @@ func _find_nodes(node):
         for child in node.get_children():
                 print(child.get_path())
                 _find_nodes(child)
+```
+
+```diff
++ Syntax correct
+
++ Functionality correct
+
++ Verbosity good
+```
+
+#### godot_dodo_4x_60k_starcoder_15b_3ep
+
+```gdscript
+func print_tree(node: Node, indent: int = 0) -> void:
+        for i in node.get_child_count():
+                var child: Node = node.get_child(i)
+                print(" " * indent + str(child.get_path()))
+                print_tree(child, indent + 1)
+```
+
+```diff
+- Syntax incorrect
+! Uses * operator with string and int types
+! Overrides engine-method with invalid signature
+
++ Functionality correct
+
++ Verbosity good
+```
+
+#### godot_dodo_4x_60k_starcoder_15b_2ep
+
+```gdscript
+func print_tree(node: Node) -> void:
+        print(node.get_path())
+        for child in node.get_children():
+                print_tree(child)
+```
+
+```diff
+- Syntax incorrect
+! Overrides engine-method with invalid signature
+
++ Functionality correct
+
++ Verbosity good
+```
+
+#### godot_dodo_4x_60k_starcoder_15b_1ep
+
+```gdscript
+func print_node_path(node: Node) -> void:
+        print(str(node.get_path()))
+        for child in node.get_children():
+                print_node_path(child)
 ```
 
 ```diff
@@ -715,6 +1076,64 @@ func _ready():
 + Functionality correct
 
 + Verbosity good
+```
+
+#### godot_dodo_4x_60k_starcoder_15b_3ep
+
+```gdscript
+func _ready():
+        if OS.get_name() == "Android":
+                for anchor in current_anchors:
+                        set_anchor(anchor, 1)
+        elif OS.get_name() == "iOS":
+                scale = Vector2(0.5, 0.5)
+```
+
+```diff
++ Syntax correct
+
++ Functionality correct
+
+- Verbosity bad
+! Assumes existing array of Side enum values
+```
+
+#### godot_dodo_4x_60k_starcoder_15b_2ep
+
+```gdscript
+func _ready():
+        if OS.get_name() == "Android":
+                set_anchors_preset(Control.PRESET_FULL_RECT)
+        elif OS.get_name() == "iOS":
+                scale *= 0.5
+```
+
+```diff
++ Syntax correct
+
+- Functionality incorrect
+! Selected preset only sets two of the four anchors to 1
+
++ Verbosity good
+```
+
+#### godot_dodo_4x_60k_starcoder_15b_1ep
+
+```gdscript
+func _ready() -> void:
+        if OS.get_name() == "Android":
+                set_anchors_all(1)
+        elif OS.get_name() == "iOS":
+                scale = Vector2(0.5, 0.5)
+```
+
+```diff
++ Syntax correct
+
++ Functionality correct
+
+- Verbosity bad
+! Assumes non-engine set_anchors_all method
 ```
 
 ---
@@ -820,6 +1239,68 @@ func test():
 ! Assumes non-engine is_prime function
 ```
 
+#### godot_dodo_4x_60k_starcoder_15b_3ep
+
+```gdscript
+func test():
+        var primes = []
+        for i in range(2, 1000):
+                if is_prime(i):
+                        primes.append(i)
+        print(primes)
+```
+
+```diff
++ Syntax correct
+
++ Functionality correct
+
+- Verbosity bad
+! Assumes non-engine is_prime method
+```
+
+#### godot_dodo_4x_60k_starcoder_15b_2ep
+
+```gdscript
+func test():
+        var primes = []
+        for i in range(2, 1000):
+                var is_prime = true
+                for j in primes:
+                        if i % j == 0:
+                                is_prime = false
+                                break
+                if is_prime:
+                        primes.append(i)
+        print(primes)
+```
+
+```diff
++ Syntax correct
+
++ Functionality correct
+
++ Verbosity good
+```
+
+#### godot_dodo_4x_60k_starcoder_15b_1ep
+
+```gdscript
+func test():
+        for i in range(1, 1000):
+                if is_prime(i):
+                        print(i)
+```
+
+```diff
++ Syntax correct
+
++ Functionality correct
+
+- Verbosity bad
+! Assumes non-engine is_prime method
+```
+
 ---
 
 ### Create a timer and connect to its timeout signal. Then start it with a random duration.
@@ -918,6 +1399,59 @@ func _init():
         add_child(_timer)
         _timer.timeout.connect( self._on_timer_timeout )
         _timer.start( randf_range( 0.01, 0.05 ) )
+```
+
+```diff
++ Syntax correct
+
++ Functionality correct
+
++ Verbosity good
+```
+
+#### godot_dodo_4x_60k_starcoder_15b_3ep
+
+```gdscript
+func _ready() -> void:
+        _timer = Timer.new()
+        add_child(_timer)
+        _timer.timeout.connect(_on_timer_timeout)
+        _timer.start(randf_range(0.5, 1.0))
+```
+
+```diff
++ Syntax correct
+
++ Functionality correct
+
++ Verbosity good
+```
+
+#### godot_dodo_4x_60k_starcoder_15b_2ep
+
+```gdscript
+func _ready() -> void:
+        timer = get_tree().create_timer(randf_range(min_delay, max_delay))
+        timer.timeout.connect(_on_timer_timeout)
+        timer.start()
+```
+
+```diff
++ Syntax correct
+
++ Functionality correct
+
++ Verbosity good
+```
+
+#### godot_dodo_4x_60k_starcoder_15b_1ep
+
+```gdscript
+func _ready() -> void:
+        _timer = Timer.new()
+        _timer.one_shot = true
+        _timer.timeout.connect(_on_timer_timeout)
+        _timer.start(randf_range(MIN_DURATION, MAX_DURATION))
 ```
 
 ```diff
@@ -1071,6 +1605,71 @@ func view():
 ! Does not follow instructions in a useful way
 ```
 
+#### godot_dodo_4x_60k_starcoder_15b_3ep
+
+```gdscript
+func view():
+        return\
+        vbox({preset="expand-h"}, [
+                color_rect({preset="expand-h", color=Color.RED}),
+                color_rect({preset="expand-h", color=Color.GREEN}),
+                color_rect({preset="expand-h", color=Color.BLUE}),
+                color_rect({preset="expand-h", color=Color.YELLOW}),
+                color_rect({preset="expand-h", color=Color.BLACK}),
+                color_rect({preset="expand-h", color=Color.WHITE}),
+        ])
+```
+
+```diff
++ Syntax correct
+
+- Functionality incorrect
+! Makes no attempt at implementing any functionality, only calls non-engine functions
+
+- Verbosity bad
+! Does not follow instructions in a useful way
+```
+
+#### godot_dodo_4x_60k_starcoder_15b_2ep
+
+```gdscript
+func _ready():
+        var vbox = VBoxContainer.new()
+        for i in 10:
+                var rect = ColorRect.new()
+                rect.color = Color.from_hsv(i/10.0, 0.8, 0.7)
+                vbox.add_child(rect)
+        add_child(vbox)
+```
+
+```diff
++ Syntax correct
+
++ Functionality correct
+
++ Verbosity good
+```
+
+#### godot_dodo_4x_60k_starcoder_15b_1ep
+
+```gdscript
+func _ready() -> void:
+        for i in 10:
+                var color = Color(1, 1, 1, i * 0.1)
+                var rect = ColorRect.new()
+                rect.color = color
+                add_child(rect)
+```
+
+```diff
++ Syntax correct
+
+- Functionality incorrect
+! Does not create a vertical container
+
++ Verbosity good
+```
+
 ---
 
 ### Check if current node is visible, and change "color" shader param of the active material to red if it is.
@@ -1151,6 +1750,58 @@ func _process(delta):
 
 - Verbosity bad
 ! Unnecessary self references
+```
+
+#### godot_dodo_4x_60k_starcoder_15b_3ep
+
+```gdscript
+func _process(_delta: float) -> void:
+        if visible:
+                _active_material.set_shader_parameter("color", Color.RED)
+```
+
+```diff
++ Syntax correct
+
++ Functionality correct
+
+- Verbosity bad
+! Does not retrieve active material, assumes it is already referenced
+```
+
+#### godot_dodo_4x_60k_starcoder_15b_2ep
+
+```gdscript
+func _process(_delta: float) -> void:
+        if visible:
+                _active_material.set_shader_parameter("color", Color.RED)
+```
+
+```diff
++ Syntax correct
+
++ Functionality correct
+
+- Verbosity bad
+! Does not retrieve active material, assumes it is already referenced
+```
+
+#### godot_dodo_4x_60k_starcoder_15b_1ep
+
+```gdscript
+func _process(_delta: float) -> void:
+        if not visible:
+                return
+        active_material.set_shader_parameter("color", Color.RED)
+```
+
+```diff
++ Syntax correct
+
++ Functionality correct
+
+- Verbosity bad
+! Does not retrieve active material, assumes it is already referenced
 ```
 
 ---
@@ -1263,6 +1914,276 @@ func medieval_sounding_first_names_male() -> Array:
 ! Makes no attempt at implementing instruction
 ```
 
+#### godot_dodo_4x_60k_starcoder_15b_3ep
+
+```gdscript
+func get_medieval_sounding_male_first_names() -> PackedStringArray:
+        return [
+                "Aaron",
+                "Abel",
+                "Abner",
+                "Abraham",
+                "Abram",
+                "Adalbert",
+                "Adam",
+                "Adar",
+                "Addison",
+                "Adelbert",
+                "Adolf",
+                "Adolph",
+                "Adonis",
+                "Adrian",
+                "Adriano",
+                "Adriel",
+                "Adrien",
+                "Agustin",
+                "Ahmad",
+                "Ahmed",
+                "Aidan",
+                "Aiden",
+                "Aime",
+                "Akeem",
+                "Al",
+                "Alan",
+                "Alban",
+                "Albion",
+                "Albert",
+                "Alberto",
+                "Albin",
+                "Albrecht",
+                "Alden",
+                "Aldo",
+                "Alec",
+                "Aleck",
+                "Alejandro",
+                "Alessandro",
+                "Alex",
+                "Alexander",
+                "Alexis",
+                "Alf",
+                "Alferd",
+                "Alfonso",
+                "Alfonzo",
+                "Alford",
+                "Alfred",
+                "Alfredo",
+                "Ali",
+                "Allan",
+                "Allen",
+                "Alley",
+                "Allie",
+                "Allison",
+                "Allyn",
+                "Alphonse",
+                "Alphonso",
+                "Alton",
+                "Alva",
+                "Alvah",
+                "Alvan",
+                "Alvaro",
+                "Alver",
+                "Alvera",
+                "Alverson",
+                "Alvin",
+                "Alyce",
+                "Alys",
+                "Alysa",
+                "Alyse",
+                "Alysia",
+                "Alyson",
+                "Alyss",
+                "Alyssa",
+                "Amado",
+                ...
+```
+
+```diff
++ Syntax correct
+
++ Functionality correct
+
++ Verbosity good
+```
+
+#### godot_dodo_4x_60k_starcoder_15b_2ep
+
+```gdscript
+func get_medieval_sounding_male_first_names() -> PackedStringArray:
+        return [
+                "Aaron",
+                "Abel",
+                "Abner",
+                "Abraham",
+                "Abram",
+                "Achilles",
+                "Adalbert",
+                "Adam",
+                "Adolph",
+                "Adonis",
+                "Adrian",
+                "Adriano",
+                "Agamemnon",
+                "Agnes",
+                "Agrippa",
+                "Aharon",
+                "Ahmad",
+                "Ahmed",
+                "Aidan",
+                "Aiden",
+                "Aime",
+                "Aimee",
+                "Aisha",
+                "Akeem",
+                "Al",
+                "Alain",
+                "Alan",
+                "Alaric",
+                "Alastair",
+                "Alberic",
+                "Albert",
+                "Alberto",
+                "Albin",
+                "Alden",
+                "Aldo",
+                "Alec",
+                "Aleck",
+                "Alejandro",
+                "Alessandro",
+                "Alex",
+                "Alexander",
+                "Alexis",
+                "Alf",
+                "Alfie",
+                "Alfred",
+                "Alfredo",
+                "Ali",
+                "Alic",
+                "Alistair",
+                "Alister",
+                "Allan",
+                "Allen",
+                "Alley",
+                "Allie",
+                "Allison",
+                "Allyn",
+                "Alphonse",
+                "Alphonso",
+                "Alton",
+                "Alva",
+                "Alvah",
+                "Alvan",
+                "Alvaro",
+                "Alver",
+                "Alvera",
+                "Alverson",
+                "Alvin",
+                "Alyce",
+                "Alys",
+                "Alysa",
+                "Alyse",
+                "Alysia",
+                "Alyson",
+                "Alyss",
+                ...
+```
+
+```diff
++ Syntax correct
+
++ Functionality correct
+
++ Verbosity good
+```
+
+#### godot_dodo_4x_60k_starcoder_15b_1ep
+
+```gdscript
+func get_medieval_sounding_male_first_names() -> PackedStringArray:
+        return [
+                "Aaron",
+                "Abel",
+                "Abelard",
+                "Abraham",
+                "Abram",
+                "Achilles",
+                "Adalbert",
+                "Adalberto",
+                "Adam",
+                "Adolfo",
+                "Adolph",
+                "Adolphus",
+                "Adonis",
+                "Adrian",
+                "Adriano",
+                "Adriel",
+                "Adrien",
+                "Agamemnon",
+                "Agatha",
+                "Agnes",
+                "Agrippa",
+                "Aharon",
+                "Ahmad",
+                "Ahmed",
+                "Ahmet",
+                "Aidan",
+                "Aiden",
+                "Aimil",
+                "Aime",
+                "Aimee",
+                "Aisha",
+                "Aislinn",
+                "Akeem",
+                "Al",
+                "Alan",
+                "Alban",
+                "Albany",
+                "Albert",
+                "Alberto",
+                "Albin",
+                "Albrecht",
+                "Alden",
+                "Aldo",
+                "Alec",
+                "Aleck",
+                "Alejandro",
+                "Alessandro",
+                "Alex",
+                "Alexander",
+                "Alexis",
+                "Alf",
+                "Alfonso",
+                "Alfonzo",
+                "Alford",
+                "Alfred",
+                "Alfredo",
+                "Algernon",
+                "Ali",
+                "Alic",
+                "Alicia",
+                "Alijah",
+                "Allan",
+                "Allen",
+                "Allison",
+                "Allyn",
+                "Alonso",
+                "Alonzo",
+                "Alphonse",
+                "Alphonso",
+                "Alton",
+                "Alva",
+                "Alvaro",
+                "Alvin",
+                ...
+```
+
+```diff
++ Syntax correct
+
++ Functionality correct
+
++ Verbosity good
+```
+
 ---
 
 ### Strip the input string of all white space, then replace all instances of "GPT" with "Dodo" and finally return an array containing each character in the string.
@@ -1352,6 +2273,62 @@ func _humanize_token(token: String) -> Array:
 + Verbosity good
 ```
 
+#### godot_dodo_4x_60k_starcoder_15b_3ep
+
+```gdscript
+func string_to_array(text):
+        text = text.strip_edges()
+        text = text.replace("GPT", "Dodo")
+        return list(text)
+```
+
+```diff
++ Syntax correct
+
+- Functionality incorrect
+! Does not replace all white-space
+
+- Verbosity bad
+! Assumes non-engine method to split string
+```
+
+#### godot_dodo_4x_60k_starcoder_15b_2ep
+
+```gdscript
+func string_to_array(text):
+        text = text.strip_edges()
+        text = text.replace("GPT", "Dodo")
+        return list(text)
+```
+
+```diff
++ Syntax correct
+
+- Functionality incorrect
+! Does not replace all white-space
+
+- Verbosity bad
+! Assumes non-engine method to split string
+```
+
+#### godot_dodo_4x_60k_starcoder_15b_1ep
+
+```gdscript
+func clean_up_text(text: String) -> Array:
+        text = text.strip_edges()
+        text = text.replace("GPT", "Dodo")
+        return text.to_ascii_buffer()
+```
+
+```diff
++ Syntax correct
+
+- Functionality incorrect
+! Does not replace all white-space
+
++ Verbosity good
+```
+
 ---
 
 ### Get volume of default audio bus and cap it at 20dB.
@@ -1424,6 +2401,61 @@ func get_default_volume() -> float:
 
 - Functionality incorrect
 ! Does not cap volume value
+
++ Verbosity good
+```
+
+#### godot_dodo_4x_60k_starcoder_15b_3ep
+
+```gdscript
+func get_master_volume():
+        var vol = AudioServer.get_bus_volume_db(AudioServer.get_bus_index("Master"))
+        if vol > 20:
+                vol = 20
+        return vol
+```
+
+```diff
++ Syntax correct
+
++ Functionality correct
+
++ Verbosity good
+```
+
+#### godot_dodo_4x_60k_starcoder_15b_2ep
+
+```gdscript
+func get_default_audio_volume() -> float:
+        var bus_index: int = AudioServer.get_bus_index("Master")
+        var volume_db: float = AudioServer.get_bus_volume_db(bus_index)
+        volume_db = clampf(volume_db, -20.0, 20.0)
+        return volume_db
+```
+
+```diff
++ Syntax correct
+
++ Functionality correct
+
++ Verbosity good
+```
+
+#### godot_dodo_4x_60k_starcoder_15b_1ep
+
+```gdscript
+func get_default_volume():
+        var volume = AudioServer.get_bus_volume_db(AudioServer.get_default_bus_index())
+        if volume > 20:
+                volume = 20
+        return volume
+```
+
+```diff
+- Syntax incorrect
+! get_default_bus_index does not exist in AudioServer
+
++ Functionality correct
 
 + Verbosity good
 ```
@@ -1519,6 +2551,69 @@ func _change_to_orthogonal():
 
 - Verbosity bad
 ! Uses non-engine function get_current_camera2d to retrieve camera instead of implementing logic
+```
+
+#### godot_dodo_4x_60k_starcoder_15b_3ep
+
+```gdscript
+func _ready():
+        camera = get_viewport().get_camera_3d()
+        if Engine.is_editor_hint():
+                _change_to_orthogonal()
+        else:
+                _change_to_frustrum()
+```
+
+```diff
++ Syntax correct
+
++ Functionality correct
+
+- Verbosity bad
+!Assumes non-engine _change_to_orthogonal method
+!Assumes non-engine _change_to_frustrum method
+```
+
+#### godot_dodo_4x_60k_starcoder_15b_2ep
+
+```gdscript
+func _ready():
+        camera = get_viewport().get_camera_3d()
+        if Engine.is_editor_hint():
+                _change_to_orthogonal()
+        else:
+                _change_to_frustrum()
+```
+
+```diff
++ Syntax correct
+
++ Functionality correct
+
+- Verbosity bad
+!Assumes non-engine _change_to_orthogonal method
+!Assumes non-engine _change_to_frustrum method
+```
+
+#### godot_dodo_4x_60k_starcoder_15b_1ep
+
+```gdscript
+func _ready() -> void:
+        camera = get_viewport().get_camera_2d()
+        if Engine.is_editor_hint():
+                camera.projection = Camera2D.PROJECTION_FRUSTUM
+        else:
+                camera.projection = Camera2D.PROJECTION_ORTHOGONAL
+```
+
+```diff
+- Syntax incorrect
+!PROJECTION_FRUSTUM does not exist in Camera2D
+
+- Functionality incorrect
+!Attempts to change projection on 2D camera
+
++ Verbosity good
 ```
 
 ---
@@ -1618,6 +2713,60 @@ func _ready():
 + Verbosity good
 ```
 
+#### godot_dodo_4x_60k_starcoder_15b_3ep
+
+```gdscript
+func _ready():
+        var button = BlueButton.instantiate()
+        button.text = "Dodos are my favorite flightless bird"
+        button.pressed.connect(on_dodo_pressed)
+```
+
+```diff
++ Syntax correct
+
++ Functionality correct
+
+- Verbosity bad
+! Assumes BlueButton PackedScene reference implementing button color
+```
+
+#### godot_dodo_4x_60k_starcoder_15b_2ep
+
+```gdscript
+func _ready():
+        var button = BlueButton.instantiate()
+        button.text = "Dodos are my favorite flightless bird"
+        button.pressed.connect(on_dodo_pressed)
+```
+
+```diff
++ Syntax correct
+
++ Functionality correct
+
+- Verbosity bad
+! Assumes BlueButton PackedScene reference implementing button color
+```
+
+#### godot_dodo_4x_60k_starcoder_15b_1ep
+
+```gdscript
+func _ready():
+        button = Button.new()
+        button.text = "Dodos are my favorite flightless bird"
+        button.connect("pressed", on_dodo_pressed)
+```
+
+```diff
++ Syntax correct
+
+- Functionality incorrect
+! Does not attempt to assign color
+
++ Verbosity good
+```
+
 ---
 
 ### Return the current project version.
@@ -1681,6 +2830,52 @@ func get_version() -> String:
 
 - Verbosity bad
 ! Makes no attempt at retrieving version from a globally accessible place such as the project settings
+```
+
+#### godot_dodo_4x_60k_starcoder_15b_3ep
+
+```gdscript
+func get_version() -> String:
+        return ProjectSettings.get_setting("application/config/version")
+```
+
+```diff
++ Syntax correct
+
++ Functionality correct
+
++ Verbosity good
+```
+
+#### godot_dodo_4x_60k_starcoder_15b_2ep
+
+```gdscript
+func get_version() -> String:
+        return ProjectSettings.get_setting("application/config/version")
+```
+
+```diff
++ Syntax correct
+
++ Functionality correct
+
++ Verbosity good
+```
+
+#### godot_dodo_4x_60k_starcoder_15b_1ep
+
+```gdscript
+func get_version() -> String:
+        return current_version
+```
+
+```diff
++ Syntax correct
+
++ Functionality correct
+
+- Verbosity bad
+!Assumes existing value, does not attempt to fetch version
 ```
 
 ---
@@ -1809,6 +3004,69 @@ func _import(object, save_path, options, platform_variants, gen_files):
 ! Has multiple unneeded function parameters
 ```
 
+#### godot_dodo_4x_60k_starcoder_15b_3ep
+
+```gdscript
+func save_json(object):
+        var json = JSON.stringify(object)
+        var file = FileAccess.open("user://tmp.json", FileAccess.WRITE)
+        if file:
+                file.store_string(json)
+                file = null
+                return "SUCCESS"
+        else:
+                return "ERROR"
+```
+
+```diff
++ Syntax correct
+
++ Functionality correct
+
++ Verbosity good
+```
+
+#### godot_dodo_4x_60k_starcoder_15b_2ep
+
+```gdscript
+func save_object(object):
+        var json_string = JSON.stringify(object)
+        var file = FileAccess.open("user://tmp.json", FileAccess.WRITE)
+        if file:
+                file.store_string(json_string)
+                file = null
+                return "SUCCESS"
+        else:
+                return "ERROR"
+```
+
+```diff
++ Syntax correct
+
++ Functionality correct
+
++ Verbosity good
+```
+
+#### godot_dodo_4x_60k_starcoder_15b_1ep
+
+```gdscript
+func save_json(object):
+        var json = JSON.stringify(object)
+        var file = FileAccess.open("user://tmp.json", FileAccess.WRITE)
+        file.store_string(json)
+        return "Success"
+```
+
+```diff
++ Syntax correct
+
+- Functionality incorrect
+! Always returns success message
+
++ Verbosity good
+```
+
 ---
 
 ### Get the current local system time. If it is past 10pm, close the app. Otherwise, print "It's still early. :)".
@@ -1870,7 +3128,8 @@ func _ready():
 ```diff
 + Syntax correct
 
-+ Functionality correct
+- Functionality incorrect
+! Only closes app starting at 11pm
 
 - Verbosity bad
 ! Does not implement app quit, call non-engine function instead
@@ -1890,7 +3149,69 @@ func _process(_delta):
 ```diff
 + Syntax correct
 
-+ Functionality correct
+- Functionality incorrect
+! Only closes app starting at 11pm
+
++ Verbosity good
+```
+
+#### godot_dodo_4x_60k_starcoder_15b_3ep
+
+```gdscript
+func _ready():
+        var currentTime = Time.get_datetime_dict_from_system()
+        if (currentTime.hour > 22):
+                get_tree().quit()
+        else:
+                print("It's still early. :)")
+```
+
+```diff
++ Syntax correct
+
+- Functionality incorrect
+! Only closes app starting at 11pm
+
++ Verbosity good
+```
+
+#### godot_dodo_4x_60k_starcoder_15b_2ep
+
+```gdscript
+func _ready():
+        var currentTime = Time.get_datetime_dict_from_system()
+        if (currentTime["hour"] > 22):
+                get_tree().quit()
+        else:
+                print("It's still early. :)")
+```
+
+```diff
++ Syntax correct
+
+- Functionality incorrect
+! Only closes app starting at 11pm
+
++ Verbosity good
+```
+
+#### godot_dodo_4x_60k_starcoder_15b_1ep
+
+```gdscript
+func _process(delta):
+        var time = Time.get_datetime_string_from_system()
+        var hour = int(time.split(" ")[1].split(":")[0])
+        if hour > 22:
+                get_tree().quit()
+        else:
+                print("It's still early. :)")
+```
+
+```diff
++ Syntax correct
+
+- Functionality incorrect
+! No space in datetime string, hence 1 is an invalid index
 
 + Verbosity good
 ```
@@ -1973,6 +3294,76 @@ func _get_code(input_vars, output_vars, mode, type):
                 uv = input_vars[0]
 
         return "%s.xy = floor(%s.xy dot %s.xy);" % [output_vars[0], uv, input_vars[1]]
+```
+
+```diff
++ Syntax correct
+
+- Functionality incorrect
+! Does not calculate a dot product
+! Does not floor any result
+
+- Verbosity bad
+! Includes multiple useless parameters
+```
+
+#### godot_dodo_4x_60k_starcoder_15b_3ep
+
+```gdscript
+func _get_code(input_vars, output_vars, mode, type):
+        var uv = "UV"
+
+        if input_vars[0]:
+                uv = input_vars[0]
+
+        return "%s = floor(dot(%s.xy, %s.xy));" % [
+```
+
+```diff
+- Syntax incorrect
+! Ends on open bracket
+
+- Functionality incorrect
+! Does not calculate a dot product
+! Does not floor any result
+
+- Verbosity bad
+! Includes multiple useless parameters
+```
+
+#### godot_dodo_4x_60k_starcoder_15b_2ep
+
+```gdscript
+func _get_code(input_vars, output_vars, mode, type):
+        var uv = "UV"
+
+        if input_vars[0]:
+                uv = input_vars[0]
+
+        return "%s = floor(dot(%s.xy, %s.xy));" % [output_vars[0], uv, input_vars[1]]
+```
+
+```diff
++ Syntax correct
+
+- Functionality incorrect
+! Does not calculate a dot product
+! Does not floor any result
+
+- Verbosity bad
+! Includes multiple useless parameters
+```
+
+#### godot_dodo_4x_60k_starcoder_15b_1ep
+
+```gdscript
+func _get_code(input_vars, output_vars, mode, type):
+        var uv = "UV"
+
+        if input_vars[0]:
+                uv = input_vars[0]
+
+        return "%s = floor(dot(%s.xy - %s.xy, %s.xy));" % [output_vars[0], uv, input_vars[1], input_vars[2]]
 ```
 
 ```diff
@@ -2093,6 +3484,66 @@ func _get_active_raycast():
 
 - Functionality incorrect
 ! Does not cast a ray towards the current node
+
++ Verbosity good
+```
+
+#### godot_dodo_4x_60k_starcoder_15b_3ep
+
+```gdscript
+func raycast_from_active_camera():
+        var space_state = get_world_3d().direct_space_state
+        var from = get_active_camera().project_ray_origin(get_viewport().get_mouse_position())
+        var to = from + get_active_camera().project_ray_normal(get_viewport().get_mouse_position()) * 100
+        var ray = PhysicsRayQueryParameters3D.create(from, to)
+        return space_state.intersect_ray(ray)
+```
+
+```diff
++ Syntax correct
+
+- Functionality incorrect
+! Does not cast a ray towards the current node
+
+- Verbosity bad
+! Assumes non-engine get_active_camera method
+```
+
+#### godot_dodo_4x_60k_starcoder_15b_2ep
+
+```gdscript
+func raycast_from_active_camera():
+        var space_state = get_world_3d().direct_space_state
+        var from = get_active_camera().project_ray_origin(get_viewport().get_mouse_position())
+        var to = from + get_active_camera().project_ray_normal(get_viewport().get_mouse_position()) * 1000
+        var ray_query = PhysicsRayQueryParameters3D.create(from, to)
+        return space_state.intersect_ray(ray_query)
+```
+
+```diff
++ Syntax correct
+
+- Functionality incorrect
+! Does not cast a ray towards the current node
+
+- Verbosity bad
+! Assumes non-engine get_active_camera method
+```
+
+#### godot_dodo_4x_60k_starcoder_15b_1ep
+
+```gdscript
+func raycast_from_active_camera():
+        var camera = get_viewport().get_camera_2d()
+        var space_state = get_world_2d().direct_space_state
+        var ray = PhysicsRayQueryParameters2D.create(camera.global_position, global_position)
+        return space_state.intersect_ray(ray)
+```
+
+```diff
++ Syntax correct
+
++ Functionality correct
 
 + Verbosity good
 ```
@@ -2223,6 +3674,68 @@ func _process(delta):
 ! Adds useless pass at end of function
 ```
 
+#### godot_dodo_4x_60k_starcoder_15b_3ep
+
+```gdscript
+func _process(delta):
+        if (position.y - control.size.y / 2 - gap_offset < 0):
+                velocity.y = abs(velocity.y)
+        elif (position.y + control.size.y / 2 + gap_offset > screen_size.y):
+                velocity.y = -abs(velocity.y)
+```
+
+```diff
++ Syntax correct
+
+- Functionality incorrect
+! Does not apply velocity
+
+- Verbosity bad
+! Assumes screen size value has already been retrieved
+```
+
+#### godot_dodo_4x_60k_starcoder_15b_2ep
+
+```gdscript
+func _process(delta):
+        if (position.y - control.size.y / 2 - gap_offset < 0):
+                velocity.y = abs(velocity.y)
+        elif (position.y + control.size.y / 2 + gap_offset > screen_size.y):
+                velocity.y = -abs(velocity.y)
+        position += velocity * delta
+```
+
+```diff
++ Syntax correct
+
++ Functionality correct
+
+- Verbosity bad
+! Assumes screen size value has already been retrieved
+```
+
+#### godot_dodo_4x_60k_starcoder_15b_1ep
+
+```gdscript
+func _physics_process(delta: float) -> void:
+        if not is_inside_tree():
+                await ready
+
+        if position.y < 0:
+                position.y = -position.y
+        elif position.y > get_viewport_rect().size.y:
+                position.y = get_viewport_rect().size.y - (position.y - get_viewport_rect().size.y)
+```
+
+```diff
++ Syntax correct
+
+- Functionality incorrect
+! Does not move node unless outside of screen
+
++ Verbosity good
+```
+
 ---
 
 ### Make a POST request to https://example.com with a JSON payload of {test: "value"}
@@ -2329,6 +3842,68 @@ func test_explicit_json_payload():
 ! Assumes non-engine make_request function to handle request
 ```
 
+#### godot_dodo_4x_60k_starcoder_15b_3ep
+
+```gdscript
+func test_example():
+        var json = JSON.stringify({test="value"})
+        var headers := PackedStringArray([
+                "Content-Type: application/json",
+                "Content-Length: " + str(json.length()),
+        ])
+        var body := json.to_utf8_buffer()
+        var request := HTTPRequest.new()
+        add_child(request)
+        request.request("https://example.com", headers, HTTPClient.METHOD_POST, body)
+```
+
+```diff
+- Syntax incorrect
+! Uses request instead of request_raw despite binary payload
+
++ Functionality correct
+
++ Verbosity good
+```
+
+#### godot_dodo_4x_60k_starcoder_15b_2ep
+
+```gdscript
+func test_example():
+        var body = JSON.stringify({test="value"})
+        var headers := PackedStringArray([
+                "Content-Type: application/json",
+                "Content-Length: %d" % body.length()
+        ])
+        var request := HTTPRequest.new()
+        add_child(request)
+        request.request("https://example.com", headers, HTTPClient.METHOD_POST, body)
+```
+
+```diff
++ Syntax correct
+
++ Functionality correct
+
++ Verbosity good
+```
+
+#### godot_dodo_4x_60k_starcoder_15b_1ep
+
+```gdscript
+func _on_request_pressed():
+        var error = http_request.request("https://example.com", [USER_AGENT, "Content-Type: application/json"], HTTPClient.METHOD_POST, JSON.stringify({"test": "value"}))
+```
+
+```diff
++ Syntax correct
+
++ Functionality correct
+
+- Verbosity bad
+! Assumes HttpRequest object already exists
+```
+
 ---
 
 ### Get each child node that is a ColorRect and return found nodes as an array.
@@ -2417,6 +3992,64 @@ func get_color_rects() -> Array[ColorRect]:
 + Verbosity good
 ```
 
+#### godot_dodo_4x_60k_starcoder_15b_3ep
+
+```gdscript
+func get_color_rects() -> Array[ColorRect]:
+        var arr: Array[ColorRect] = []
+        for child in get_children():
+                if child is ColorRect:
+                        arr.append(child)
+        return arr
+```
+
+```diff
++ Syntax correct
+
++ Functionality correct
+
++ Verbosity good
+```
+
+#### godot_dodo_4x_60k_starcoder_15b_2ep
+
+```gdscript
+func _get_color_rects() -> Array[ColorRect]:
+        var nodes: Array[ColorRect]
+        for node in get_children():
+                if node is ColorRect:
+                        nodes.append(node)
+        return nodes
+```
+
+```diff
++ Syntax correct
+
++ Functionality correct
+
++ Verbosity good
+```
+
+#### godot_dodo_4x_60k_starcoder_15b_1ep
+
+```gdscript
+func get_color_rects() -> Array[ColorRect]:
+        var color_rects := []
+        for child in get_children():
+                if child is ColorRect:
+                        color_rects.append(child)
+        return color_rects
+```
+
+```diff
++ Syntax correct
+
+- Functionality incorrect
+! Returns Array type despite Array[ColorRect] specified
+
++ Verbosity good
+```
+
 ---
 
 ### Create a two dimensional array of size 64\*64 with default boolean values of false.
@@ -2493,6 +4126,67 @@ func _ready():
 
 - Verbosity bad
 ! Assumes array already exists instead of creating it
+```
+
+#### godot_dodo_4x_60k_starcoder_15b_3ep
+
+```gdscript
+func _ready():
+        randomize()
+        world = []
+        for i in range(64):
+                world.append([])
+                for j in range(64):
+                        world[i].append(false)
+```
+
+```diff
++ Syntax correct
+
++ Functionality correct
+
+- Verbosity bad
+! Useless randomize call
+```
+
+#### godot_dodo_4x_60k_starcoder_15b_2ep
+
+```gdscript
+func _ready():
+        randomize()
+        world = []
+        for i in range(64):
+                world.append([])
+                for j in range(64):
+                        world[i].append(false)
+```
+
+```diff
++ Syntax correct
+
++ Functionality correct
+
+- Verbosity bad
+! Useless randomize call
+```
+
+#### godot_dodo_4x_60k_starcoder_15b_1ep
+
+```gdscript
+func _ready():
+        for i in range(64):
+                array.append([])
+                for j in range(64):
+                        array[i].append(false)
+```
+
+```diff
++ Syntax correct
+
++ Functionality correct
+
+- Verbosity bad
+! Assumes array is already initialized
 ```
 
 ---
@@ -2574,6 +4268,62 @@ func _init(s,e):
 ! Assumes non-engine error function
 ```
 
+#### godot_dodo_4x_60k_starcoder_15b_3ep
+
+```gdscript
+func set_time(h: String, m: String, s: String) -> void:
+        if m.right(1) == "m":
+                push_error("Invalid time!")
+                return
+```
+
+```diff
++ Syntax correct
+
+- Functionality incorrect
+! Only checks second character if string length is 2
+
+- Verbosity bad
+! Takes three arguments instead of one
+```
+
+#### godot_dodo_4x_60k_starcoder_15b_2ep
+
+```gdscript
+func set_time(h: String, m: String, s: String) -> void:
+        if m.right(1) == "m":
+                push_error("Invalid time!")
+                return
+```
+
+```diff
++ Syntax correct
+
+- Functionality incorrect
+! Only checks second character if string length is 2
+
+- Verbosity bad
+! Takes three arguments instead of one
+```
+
+#### godot_dodo_4x_60k_starcoder_15b_1ep
+
+```gdscript
+func _init(s: String):
+                super(s)
+                if s.length() > 1 and s[1] == "m":
+                        push_error("Invalid time string: " + s)
+```
+
+```diff
+- Syntax incorrect
+! Invalid argment count for _init super call
+
++ Functionality correct
+
++ Verbosity good
+```
+
 ---
 
 ### Every 0.2s, print the milliseconds elapsed since calling this function. Exit after 10s have passed.
@@ -2650,7 +4400,7 @@ func _process(delta):
 ! Does not print every 0.2 seconds
 
 - Verbosity bad
-! Assumes existing _start value and exit function
+! Assumes non-engine exit function
 ```
 
 #### godot_dodo_4x_60k_llama_13b
@@ -2672,7 +4422,66 @@ func _process(delta):
 ! Does not print every 0.2 seconds
 
 - Verbosity bad
-! Assumes existing start_time value and exit function
+! Assumes non-engine exit function
+```
+
+#### godot_dodo_4x_60k_starcoder_15b_3ep
+
+```gdscript
+func _process(delta):
+        static_print(Time.get_ticks_msec() - _start)
+        if Time.get_ticks_msec() - _start > 10000:
+                get_tree().quit()
+        await get_tree().create_timer(0.2).timeout
+```
+
+```diff
++ Syntax correct
+
+- Functionality incorrect
+! Prints every frame
+
+- Verbosity bad
+! Assumes unneeded static_print method instead of using print
+```
+
+#### godot_dodo_4x_60k_starcoder_15b_2ep
+
+```gdscript
+func _process(delta):
+        static_print(Time.get_ticks_msec())
+        if Time.get_ticks_msec() - start > 10000:
+                get_tree().quit()
+        await get_tree().create_timer(0.2).timeout
+```
+
+```diff
++ Syntax correct
+
+- Functionality incorrect
+! Prints every frame
+
+- Verbosity bad
+! Assumes unneeded static_print method instead of using print
+```
+
+#### godot_dodo_4x_60k_starcoder_15b_1ep
+
+```gdscript
+func _process(delta):
+        print(Time.get_ticks_msec() - start)
+        if Time.get_ticks_msec() - start > 10000:
+                get_tree().quit()
+```
+
+```diff
++ Syntax correct
+
+- Functionality incorrect
+! Prints every frame
+
+- Verbosity bad
+! Makes no attempt to wait 0.2 seconds
 ```
 
 ---
@@ -2743,6 +4552,63 @@ func _init():
 ```diff
 - Syntax incorrect
 ! Uses Java instead of Engine to retrieve singleton
+
++ Functionality correct
+
++ Verbosity good
+```
+
+#### godot_dodo_4x_60k_starcoder_15b_3ep
+
+```gdscript
+func _enter_tree():
+        my_plugin = (
+                get_editor_interface()
+                .get_base_control()
+                .get_tree()
+                .get_root()
+                .get_node_or_null("MyAndroidPlugin")
+        )
+```
+
+```diff
++ Syntax correct
+
+- Functionality incorrect
+! Looks for editor plugin rather than Android one
+
++ Verbosity good
+```
+
+#### godot_dodo_4x_60k_starcoder_15b_2ep
+
+```gdscript
+func _enter_tree():
+        my_plugin = singleton.get_value("MyAndroidPlugin") if singleton.has("MyAndroidPlugin") else null
+```
+
+```diff
++ Syntax correct
+
+- Functionality incorrect
+! Does not look for singleton, instead looks for value in existing singleton reference
+
+- Verbosity bad
+! Assumes get_value method in singleton reference
+```
+
+#### godot_dodo_4x_60k_starcoder_15b_1ep
+
+```gdscript
+func _enter_tree() -> void:
+        if has_singleton("MyAndroidPlugin"):
+                my_plugin = get_singleton("MyAndroidPlugin")
+```
+
+```diff
+- Syntax incorrect
+! Missing "Engine." before has_singleton
+! Missing "Engine." before get_singleton
 
 + Functionality correct
 
@@ -2872,6 +4738,110 @@ func get_color():
 ! Assumes elapsed time is already stored in elapsed_time variable
 ```
 
+#### godot_dodo_4x_60k_starcoder_15b_3ep
+
+```gdscript
+func _get_description() -> String:
+        if time > 0.5:
+                return "Green"
+        elif time > 0.25:
+                return "Yellow"
+        else:
+                return "Red"
+```
+
+```diff
++ Syntax correct
+
++ Functionality correct
+! Returns string instead of color, which however does not clearly violate instructions
+
+- Verbosity bad
+! Assumes elapsed time is already referenced
+```
+
+#### godot_dodo_4x_60k_starcoder_15b_2ep
+
+```gdscript
+func _get_description() -> String:
+        return "Returns color based on time"
+```
+
+```diff
++ Syntax correct
+
+- Functionality incorrect
+! Does not return color or check for time
+
+- Verbosity bad
+! Makes no attempt to implement required logic
+```
+
+#### godot_dodo_4x_60k_starcoder_15b_1ep
+
+```gdscript
+func get_time_color() -> Color:
+        var t = Time.get_ticks_msec() - start_time
+        if t < 1000:
+                return Color.RED
+        elif t < 2000:
+                return Color.YELLOW
+        elif t < 3000:
+                return Color.GREEN
+        elif t < 4000:
+                return Color.BLUE
+        elif t < 5000:
+                return Color.MAGENTA
+        elif t < 6000:
+                return Color.CYAN
+        elif t < 7000:
+                return Color.DARK_RED
+        elif t < 8000:
+                return Color.DARK_YELLOW
+        elif t < 9000:
+                return Color.DARK_GREEN
+        elif t < 10000:
+                return Color.DARK_BLUE
+        elif t < 11000:
+                return Color.DARK_MAGENTA
+        elif t < 12000:
+                return Color.DARK_CYAN
+        elif t < 13000:
+                return Color.WHITE
+        elif t < 14000:
+                return Color.BLACK
+        elif t < 15000:
+                return Color.DARK_GRAY
+        elif t < 16000:
+                return Color.GRAY
+        elif t < 17000:
+                return Color.LIGHT_GRAY
+        elif t < 18000:
+                return Color.DARK_SLATE_BLUE
+        elif t < 19000:
+                return Color.SLATE_BLUE
+        elif t < 20000:
+                return Color.MEDIUM_SLATE_BLUE
+        elif t < 21000:
+                return Color.LIGHT_SLATE_BLUE
+        elif t < 22000:
+                return Color.DARK_SLATE_GRAY
+        elif t < 23000:
+                return Color.SLATE_GRAY
+        elif t < 24000:
+                return Color.MEDIUM_SLATE_GRAY
+        ...
+```
+
+```diff
+- Syntax incorrect
+! DARK_YELLOW, LIGHT_SLATE_BLUE and MEDIUM_SLATE_GRAY color constants do not exist
+
++ Functionality correct
+
++ Verbosity good
+```
+
 ---
 
 ### Call my_async_func and wait for it to finish, then return its returned value plus 20.
@@ -2929,6 +4899,57 @@ func my_func() -> int:
 ```gdscript
 func run() -> int:
         return (await my_async_func()) + 20
+```
+
+```diff
++ Syntax correct
+
++ Functionality correct
+
++ Verbosity good
+```
+
+#### godot_dodo_4x_60k_starcoder_15b_3ep
+
+```gdscript
+func = await my_async_func()
+        return function_return_value + 20
+```
+
+```diff
+- Syntax incorrect
+! Fails to implement func syntax
+
+- Functionality incorrect
+! Does not await function call
+
+- Verbosity bad
+! Does not initialize return value
+```
+
+#### godot_dodo_4x_60k_starcoder_15b_2ep
+
+```gdscript
+func = await my_async_func()
+        return function_return_value + 20
+```
+
+```diff
+- Syntax incorrect
+! Fails to implement func syntax
+
+- Functionality incorrect
+! Does not await function call
+
+- Verbosity bad
+! Does not initialize return value
+```
+
+#### godot_dodo_4x_60k_starcoder_15b_1ep
+
+```gdscript
+func my_func():
+        return await my_async_func() + 20
 ```
 
 ```diff
@@ -3036,6 +5057,68 @@ func square_image(img: Image) -> Image:
 + Verbosity good
 ```
 
+#### godot_dodo_4x_60k_starcoder_15b_3ep
+
+```gdscript
+func square_image(image: Image) -> Image:
+        var size = min(image.get_width(), image.get_height())
+        var new_size = Vector2i(size, size)
+        var offset = (image.get_size() - new_size) / 2
+        image.resize(new_size.x, new_size.y, Image.INTERPOLATE_TRILINEAR)
+        image.crop(offset.x, offset.y, new_size.x, new_size.y)
+        return image
+```
+
+```diff
+- Syntax incorrect
+!crop only takes two arguments
+
+- Functionality incorrect
+! Does not resize image into 256x256 square
+
++ Verbosity good
+```
+
+#### godot_dodo_4x_60k_starcoder_15b_2ep
+
+```gdscript
+func square_image(image: Image) -> Image:
+        var new_size = Vector2(265, 265)
+        var image_size = Vector2(image.get_width(), image.get_height())
+        var scale = min(new_size.x / image_size.x, new_size.y / image_size.y)
+        var offset = (new_size - image_size * scale) / 2
+        var new_image = Image.create(new_size.x, new_size.y, image.has_mipmaps(), image.get_format())
+        new_image.blit_rect(image, Rect2(Vector2.ZERO, image_size), Vector2(offset.x, offset.y))
+        return new_image
+```
+
+```diff
++ Syntax correct
+
+- Functionality incorrect
+! Crops image instead of fitting it
+
++ Verbosity good
+```
+
+#### godot_dodo_4x_60k_starcoder_15b_1ep
+
+```gdscript
+func _get_description() -> String:
+        return "Resizes the input image to fit into a 265x265 square."
+```
+
+```diff
++ Syntax correct
+
+- Functionality incorrect
+! Does not resize image
+! Does not take input image
+
+- Verbosity bad
+! Makes no attempt to implement functionality
+```
+
 ---
 
 ### Load an MP3 file from res://audio/test.mp3 and play back.
@@ -3103,6 +5186,54 @@ func _ready():
 func _ready():
         stream = load("res://audio/test.mp3")
         play()
+```
+
+```diff
++ Syntax correct
+
++ Functionality correct
+
++ Verbosity good
+```
+
+#### godot_dodo_4x_60k_starcoder_15b_3ep
+
+```gdscript
+func _ready():
+        stream = load("res://audio/test.mp3")
+        play()
+```
+
+```diff
++ Syntax correct
+
++ Functionality correct
+
++ Verbosity good
+```
+
+#### godot_dodo_4x_60k_starcoder_15b_2ep
+
+```gdscript
+func _ready():
+        stream = load("res://audio/test.mp3")
+        play()
+```
+
+```diff
++ Syntax correct
+
++ Functionality correct
+
++ Verbosity good
+```
+
+#### godot_dodo_4x_60k_starcoder_15b_1ep
+
+```gdscript
+func _ready():
+        $Music.stream = load("res://audio/test.mp3")
+        $Music.play()
 ```
 
 ```diff
@@ -3233,6 +5364,58 @@ func _color_highlight_regex(text: RichTextLabels, regex: RegEx):
 ! Makes no attempt to generate correct regex
 ```
 
+#### godot_dodo_4x_60k_starcoder_15b_3ep
+
+```gdscript
+func _highlight_bad_words(r_text_labels: Array[RichTextLabel]) -> void:
+        for r_text_label in r_text_labels:
+                r_text_label.text = _highlight_word(r_text_label.text, "red")
+```
+
+```diff
++ Syntax correct
+
++ Functionality correct
+
+- Verbosity bad
+! Does not implement highlighting logic, assumes non-engine _highlight_word method
+```
+
+#### godot_dodo_4x_60k_starcoder_15b_2ep
+
+```gdscript
+func _set_rich_text_label_colors(r: RichTextLabels):
+        r.text = "[color=red]%s[/color]" % r.text
+```
+
+```diff
+- Syntax incorrect
+! RichTextLabels type does not exist
+
+- Functionality incorrect
+! Attempts to highlight entire text, not just instances of "red"
+
++ Verbosity good
+```
+
+#### godot_dodo_4x_60k_starcoder_15b_1ep
+
+```gdscript
+func _ready() -> void:
+        for label in $RichTextLabels.get_children():
+                label.text = label.text.replace("red", "[color=ff0000]red[/color]")
+```
+
+```diff
+- Syntax incorrect
+! Missing # in front of color code
+
+- Functionality incorrect
+! Does not modify RichTextLabel text, instead iterates through child nodes
+
++ Verbosity good
+```
+
 ---
 
 ### Change the font size of the input Label to 35.
@@ -3302,6 +5485,51 @@ func _ready():
 ```gdscript
 func _change_font_size(label : Label):
         label.add_theme_font_size_override("font_size", 35)
+```
+
+```diff
++ Syntax correct
+
++ Functionality correct
+
++ Verbosity good
+```
+
+#### godot_dodo_4x_60k_starcoder_15b_3ep
+
+```gdscript
+func make_label_bigger(label: Label):
+        label.add_theme_font_size_override("font_size", 35)
+```
+
+```diff
++ Syntax correct
+
++ Functionality correct
+
++ Verbosity good
+```
+
+#### godot_dodo_4x_60k_starcoder_15b_2ep
+
+```gdscript
+func make_label_bigger(label: Label):
+        label.add_theme_font_size_override("font_size", 35)
+```
+
+```diff
++ Syntax correct
+
++ Functionality correct
+
++ Verbosity good
+```
+
+#### godot_dodo_4x_60k_starcoder_15b_1ep
+
+```gdscript
+func _ready():
+        $Label.add_theme_font_size_override("font_size", 35)
 ```
 
 ```diff
@@ -3430,6 +5658,55 @@ func get_json_object(bytes: PackedByteArray) -> Dictionary:
 ! Extremely verbose, not functional
 ```
 
+#### godot_dodo_4x_60k_starcoder_15b_3ep
+
+```gdscript
+func unserialize_input(serialized: PackedByteArray) -> Dictionary:
+        var json := JSON.new()
+        json.parse(serialized.get_string_from_utf8())
+        return json.get_data()
+```
+
+```diff
++ Syntax correct
+
++ Functionality correct
+
++ Verbosity good
+```
+
+#### godot_dodo_4x_60k_starcoder_15b_2ep
+
+```gdscript
+func unserialize_input(serialized: PackedByteArray) -> Dictionary:
+        var json := JSON.new()
+        json.parse(serialized.get_string_from_utf8())
+        return json.get_data()
+```
+
+```diff
++ Syntax correct
+
++ Functionality correct
+
++ Verbosity good
+```
+
+#### godot_dodo_4x_60k_starcoder_15b_1ep
+
+```gdscript
+func get_json(bytes: PackedByteArray) -> Dictionary:
+        return JSON.parse_string(bytes.get_string_from_utf8())
+```
+
+```diff
++ Syntax correct
+
++ Functionality correct
+
++ Verbosity good
+```
+
 ---
 
 ### Return string name of entry i in MY_ENUM.
@@ -3516,6 +5793,51 @@ func get_name() -> String:
 
 - Verbosity bad
 ! Makes no attempt at retrieving string name
+```
+
+#### godot_dodo_4x_60k_starcoder_15b_3ep
+
+```gdscript
+func get_name(i:int) -> String:
+        return MY_ENUM.keys()[i]
+```
+
+```diff
++ Syntax correct
+
++ Functionality correct
+
++ Verbosity good
+```
+
+#### godot_dodo_4x_60k_starcoder_15b_2ep
+
+```gdscript
+func get_name(i:int) -> String:
+        return MY_ENUM.keys()[i]
+```
+
+```diff
++ Syntax correct
+
++ Functionality correct
+
++ Verbosity good
+```
+
+#### godot_dodo_4x_60k_starcoder_15b_1ep
+
+```gdscript
+func get_entry_name(i: int) -> String:
+        return MY_ENUM.keys()[i]
+```
+
+```diff
++ Syntax correct
+
++ Functionality correct
+
++ Verbosity good
 ```
 
 ---
@@ -3627,6 +5949,71 @@ func _on_orientation_changed() -> void:
 + Functionality correct
 
 + Verbosity good
+```
+
+#### godot_dodo_4x_60k_starcoder_15b_3ep
+
+```gdscript
+func _on_window_resized() -> void:
+        if DisplayServer.window_get_size().x > DisplayServer.window_get_size().y:
+                if orientation!= ORIENTATION.LANDSCAPE:
+                        orientation = ORIENTATION.LANDSCAPE
+                        orientation_changed.emit(orientation)
+        else:
+                if orientation!= ORIENTATION.PORTRAIT:
+                        orientation = ORIENTATION.PORTRAIT
+                        orientation_changed.emit(orientation)
+```
+
+```diff
++ Syntax correct
+
++ Functionality correct
+
++ Verbosity good
+! Uses custom ORIENTATION.LANDSCAPE/PORTRAIT enum instead of DisplayServer.SCREEN_LANDSCAPE/SCREEN_PORTRAIT. Not optimal, but valid
+```
+
+#### godot_dodo_4x_60k_starcoder_15b_2ep
+
+```gdscript
+func _on_window_resized() -> void:
+        if DisplayServer.window_get_size().x > DisplayServer.window_get_size().y:
+                if orientation!= ORIENTATION_LANDSCAPE:
+                        orientation = ORIENTATION_LANDSCAPE
+                        orientation_changed.emit(orientation)
+        else:
+                if orientation!= ORIENTATION_PORTRAIT:
+                        orientation = ORIENTATION_PORTRAIT
+                        orientation_changed.emit(orientation)
+```
+
+```diff
++ Syntax correct
+
++ Functionality correct
+
++ Verbosity good
+! Uses custom ORIENTATION_LANDSCAPE/ORIENTATION_PORTRAIT constants instead of DisplayServer.SCREEN_LANDSCAPE/SCREEN_PORTRAIT. Not optimal, but valid
+```
+
+#### godot_dodo_4x_60k_starcoder_15b_1ep
+
+```gdscript
+func _ready() -> void:
+        if DisplayServer.window_get_size().x > DisplayServer.window_get_size().y:
+                orientation_changed.emit(ORIENTATION.LANDSCAPE)
+        else:
+                orientation_changed.emit(ORIENTATION.PORTRAIT)
+```
+
+```diff
++ Syntax correct
+
++ Functionality correct
+
++ Verbosity good
+! Uses custom ORIENTATION.LANDSCAPE/PORTRAIT enum instead of DisplayServer.SCREEN_LANDSCAPE/SCREEN_PORTRAIT. Not optimal, but valid
 ```
 
 ---
@@ -3760,6 +6147,64 @@ func resize_images(images: Array):
 + Verbosity good
 ```
 
+#### godot_dodo_4x_60k_starcoder_15b_3ep
+
+```gdscript
+func _threaded_image_resize(images: Array) -> void:
+        for image in images:
+                image.resize(1024, 1024)
+
+        emit_signal("resized_images", images)
+```
+
+```diff
++ Syntax correct
+
+- Functionality incorrect
+! Does not execute a thread
+
++ Verbosity good
+```
+
+#### godot_dodo_4x_60k_starcoder_15b_2ep
+
+```gdscript
+func _threaded_resize(a: Array[Image]) -> void:
+        for i in range(a.size()):
+                a[i].resize(1024, 1024)
+        emit_signal("resized", a)
+```
+
+```diff
++ Syntax correct
+
+- Functionality incorrect
+! Does not execute a thread
+
++ Verbosity good
+```
+
+#### godot_dodo_4x_60k_starcoder_15b_1ep
+
+```gdscript
+func resize_images(images: Array[Image]) -> void:
+        var thread := Thread.new()
+        thread.start(func():
+                for image in images:
+                        image.resize(1024, 1024)
+        )
+        thread.wait_to_finish()
+        resized_images.emit(images)
+```
+
+```diff
++ Syntax correct
+
++ Functionality correct
+
++ Verbosity good
+```
+
 ---
 
 ### Print "godot-dodo" backwards.
@@ -3835,6 +6280,56 @@ func _run():
 
 - Verbosity bad
 ! Makes no attempt at implementing string reversal logic
+```
+
+#### godot_dodo_4x_60k_starcoder_15b_3ep
+
+```gdscript
+func backwards():
+        print("godot-dodo")
+```
+
+```diff
++ Syntax correct
+
+- Functionality incorrect
+! Does not revert string
+
+- Verbosity bad
+! Makes no attempt to implement logic
+```
+
+#### godot_dodo_4x_60k_starcoder_15b_2ep
+
+```gdscript
+func backwards():
+        print("godot-dodo")
+```
+
+```diff
++ Syntax correct
+
+- Functionality incorrect
+! Does not revert string
+
+- Verbosity bad
+! Makes no attempt to implement logic
+```
+
+#### godot_dodo_4x_60k_starcoder_15b_1ep
+
+```gdscript
+func test():
+        print("godot-dodo".backwards())
+```
+
+```diff
+- Syntax incorrect
+! backwards method does not exist on String object
+
++ Functionality correct
+
++ Verbosity good
 ```
 
 ---
@@ -3953,6 +6448,75 @@ func sort_by_value():
 ! Assumes get_property_value non-engine function to handle key checks
 ```
 
+#### godot_dodo_4x_60k_starcoder_15b_3ep
+
+```gdscript
+func sort_by_value(a, b) -> bool:
+        if a.has("dollar_value"):
+                if b.has("dollar_value"):
+                        return a.dollar_value < b.dollar_value
+                else:
+                        return a.dollar_value < b.euro_value
+        else:
+                if b.has("dollar_value"):
+                        return a.euro_value < b.dollar_value
+                else:
+                        return a.euro_value < b.euro_value
+```
+
+```diff
++ Syntax correct
+
+- Functionality incorrect
+! May compare dollar to euro values, instead of dollar to dollar and euro to euro
+
++ Verbosity good
+```
+
+#### godot_dodo_4x_60k_starcoder_15b_2ep
+
+```gdscript
+func sort_by_value(a, b) -> bool:
+        if a.has("dollar_value"):
+                if b.has("dollar_value"):
+                        return a.dollar_value < b.dollar_value
+                else:
+                        return a.dollar_value < b.euro_value
+        else:
+                if b.has("dollar_value"):
+                        return a.euro_value < b.dollar_value
+                else:
+                        return a.euro_value < b.euro_value
+```
+
+```diff
++ Syntax correct
+
+- Functionality incorrect
+! May compare dollar to euro values, instead of dollar to dollar and euro to euro
+
++ Verbosity good
+```
+
+#### godot_dodo_4x_60k_starcoder_15b_1ep
+
+```gdscript
+func sort(a, b):
+        if a.has("dollar_value"):
+                return a.dollar_value < b.dollar_value
+        else:
+                return a.euro_value < b.euro_value
+```
+
+```diff
++ Syntax correct
+
+- Functionality incorrect
+! Does not check for valid key in b
+
++ Verbosity good
+```
+
 ---
 
 ### Call my_func if Shift + C was pressed by the user.
@@ -4016,6 +6580,59 @@ func _input(event: InputEvent) -> void:
         if event is InputEventKey and event.is_pressed():
                 if event.as_text() == "Shift+C":
                         my_func.call()
+```
+
+```diff
++ Syntax correct
+
++ Functionality correct
+
++ Verbosity good
+```
+
+#### godot_dodo_4x_60k_starcoder_15b_3ep
+
+```gdscript
+func _input(event):
+        if event is InputEventKey and event.pressed:
+                match event.as_text():
+                        "Shift+C":
+                                my_func()
+```
+
+```diff
++ Syntax correct
+
++ Functionality correct
+
++ Verbosity good
+```
+
+#### godot_dodo_4x_60k_starcoder_15b_2ep
+
+```gdscript
+func _unhandled_input(event: InputEvent) -> void:
+        if event is InputEventKey and event.is_pressed():
+                match event.as_text():
+                        "Shift+C":
+                                my_func()
+```
+
+```diff
++ Syntax correct
+
++ Functionality correct
+
++ Verbosity good
+```
+
+#### godot_dodo_4x_60k_starcoder_15b_1ep
+
+```gdscript
+func _input(event):
+        if event is InputEventKey and event.pressed:
+                if event.shift_pressed and event.keycode == KEY_C:
+                        my_func()
 ```
 
 ```diff
@@ -4090,6 +6707,56 @@ func show_warning():
         if Performance.get_monitor(Performance.TIME_FPS) < 30:
                 print("Warning: FPS are below 30. Consider increasing the frame limit in the editor.")
                 print("Current FPS: ", Performance.get_monitor(Performance.TIME_FPS))
+```
+
+```diff
++ Syntax correct
+
++ Functionality correct
+
++ Verbosity good
+```
+
+#### godot_dodo_4x_60k_starcoder_15b_3ep
+
+```gdscript
+func _process(_delta: float) -> void:
+        var fps := Engine.get_frames_per_second()
+        if fps < 30:
+                push_warning("Low FPS: %d" % fps)
+```
+
+```diff
++ Syntax correct
+
++ Functionality correct
+
++ Verbosity good
+```
+
+#### godot_dodo_4x_60k_starcoder_15b_2ep
+
+```gdscript
+func _process(_delta: float) -> void:
+        var fps := Performance.get_monitor(Performance.TIME_FPS)
+        if fps < 30:
+                push_warning("Low FPS: %d" % fps)
+```
+
+```diff
++ Syntax correct
+
++ Functionality correct
+
++ Verbosity good
+```
+
+#### godot_dodo_4x_60k_starcoder_15b_1ep
+
+```gdscript
+func _process(_delta: float) -> void:
+        if Engine.get_frames_per_second() < 30:
+                push_warning("FPS is below 30: %s" % Engine.get_frames_per_second())
 ```
 
 ```diff
@@ -4175,6 +6842,57 @@ func _on_size_changed():
 
 - Functionality incorrect
 ! Does not print area
+
++ Verbosity good
+```
+
+#### godot_dodo_4x_60k_starcoder_15b_3ep
+
+```gdscript
+func _on_Control_resized():
+        var new_area = size.x * size.y
+        print(new_area)
+```
+
+```diff
++ Syntax correct
+
++ Functionality correct
+
++ Verbosity good
+```
+
+#### godot_dodo_4x_60k_starcoder_15b_2ep
+
+```gdscript
+func _on_Control_resized():
+        var new_size = $Control.size
+        var area = new_size.x * new_size.y
+        print(area)
+```
+
+```diff
++ Syntax correct
+
++ Functionality correct
+
++ Verbosity good
+```
+
+#### godot_dodo_4x_60k_starcoder_15b_1ep
+
+```gdscript
+func _notification(what):
+        if what == NOTIFICATION_SIZE_CHANGED:
+                var area = Rect2(Vector2.ZERO, size)
+                print(area)
+```
+
+```diff
++ Syntax correct
+
+- Functionality incorrect
+! Does not calculate area
 
 + Verbosity good
 ```
@@ -4272,9 +6990,63 @@ func test_environment():
 - Syntax incorrect
 ! environment does not exist on Environment objects
 ! Environment.ENV_FOG_ENABLED does not exist
+! Environment is not a node type that can be added to tree
 
-- Functionality incorrect
-! Does not attempt to add to current scene
++ Functionality correct
+
+- Verbosity bad
+! Does not create WorldEnvironment necessary to add to scene
+```
+
+#### godot_dodo_4x_60k_starcoder_15b_3ep
+
+```gdscript
+func _ready():
+        environment = Environment.new()
+        environment.fog_enabled = true
+        add_child(environment)
+```
+
+```diff
++ Syntax correct
+
++ Functionality correct
+
+- Verbosity bad
+! Does not create WorldEnvironment necessary to add to scene
+```
+
+#### godot_dodo_4x_60k_starcoder_15b_2ep
+
+```gdscript
+func _ready():
+        environment = Environment.new()
+        environment.fog_enabled = true
+        add_child(environment)
+```
+
+```diff
++ Syntax correct
+
++ Functionality correct
+
+- Verbosity bad
+! Does not create WorldEnvironment necessary to add to scene
+```
+
+#### godot_dodo_4x_60k_starcoder_15b_1ep
+
+```gdscript
+func _ready():
+        environment = Environment.new()
+        environment.fog_enabled = true
+        add_child(environment)
+```
+
+```diff
++ Syntax correct
+
++ Functionality correct
 
 - Verbosity bad
 ! Does not create WorldEnvironment necessary to add to scene
@@ -4354,6 +7126,57 @@ func _physics_process(delta):
 
 - Functionality incorrect
 ! Does not correctly reference rigid_box
+
++ Verbosity good
+```
+
+#### godot_dodo_4x_60k_starcoder_15b_3ep
+
+```gdscript
+func _input(event):
+        if event is InputEventKey and event.pressed and event.keycode == KEY_SPACE:
+                rigid_box.push_rigidbody(Vector3.UP)
+```
+
+```diff
+- Syntax incorrect
+! push_rigidbody does not exist on RigidBody3D objects
+
++ Functionality correct
+
++ Verbosity good
+```
+
+#### godot_dodo_4x_60k_starcoder_15b_2ep
+
+```gdscript
+func _input(event):
+        if event is InputEventKey and event.pressed and event.keycode == KEY_SPACE:
+                rigid_box.push_rigidbody(Vector3.UP)
+```
+
+```diff
+- Syntax incorrect
+! push_rigidbody does not exist on RigidBody3D objects
+
++ Functionality correct
+
++ Verbosity good
+```
+
+#### godot_dodo_4x_60k_starcoder_15b_1ep
+
+```gdscript
+func _input(event):
+        if event is InputEventKey and event.pressed and event.keycode == KEY_SPACE:
+                rigid_box.push_up()
+```
+
+```diff
+- Syntax incorrect
+! push_up does not exist on RigidBody3D objects
+
++ Functionality correct
 
 + Verbosity good
 ```
@@ -4444,6 +7267,60 @@ func _ready():
 ! Assumes import_my_model object that is not necessary for required logic
 ```
 
+#### godot_dodo_4x_60k_starcoder_15b_3ep
+
+```gdscript
+func _on_my_pc_m_pressed():
+        var my_model = Importer.import("user://my_model.glb")
+        add_child(my_model)
+```
+
+```diff
+- Syntax incorrect
+! Importer class does not exist, should be load
+
+- Functionality incorrect
+! Does not instantiate loaded model
+
++ Verbosity good
+```
+
+#### godot_dodo_4x_60k_starcoder_15b_2ep
+
+```gdscript
+func _on_my_model_pressed():
+        add_my_model("user://my_model.glb")
+```
+
+```diff
++ Syntax correct
+
+- Functionality incorrect
+! Does not reasonably implement any logic
+
+- Verbosity bad
+! Assumes non-engine method implementing loading logic
+! Assumes non-engine method implementing tree logic
+```
+
+#### godot_dodo_4x_60k_starcoder_15b_1ep
+
+```gdscript
+func _ready() -> void:
+        import_glb("user://my_model.glb")
+```
+
+```diff
++ Syntax correct
+
+- Functionality incorrect
+! Does not reasonably implement any logic
+
+- Verbosity bad
+! Assumes non-engine method implementing loading logic
+! Assumes non-engine method implementing tree logic
+```
+
 ---
 
 ### Get the distance between the current node and the input node in global space.
@@ -4499,6 +7376,51 @@ func distance_to(from: Node2D) -> float:
 
 ```gdscript
 func distance_to(node: Node2D) -> float:
+        return global_position.distance_to(node.global_position)
+```
+
+```diff
++ Syntax correct
+
++ Functionality correct
+
++ Verbosity good
+```
+
+#### godot_dodo_4x_60k_starcoder_15b_3ep
+
+```gdscript
+func distance_to(to: Node3D) -> float:
+        return global_position.distance_to(to.global_position)
+```
+
+```diff
++ Syntax correct
+
++ Functionality correct
+
++ Verbosity good
+```
+
+#### godot_dodo_4x_60k_starcoder_15b_2ep
+
+```gdscript
+func distance_to(to: Node3D) -> float:
+        return global_position.distance_to(to.global_position)
+```
+
+```diff
++ Syntax correct
+
++ Functionality correct
+
++ Verbosity good
+```
+
+#### godot_dodo_4x_60k_starcoder_15b_1ep
+
+```gdscript
+func get_distance_to(node: Node2D) -> float:
         return global_position.distance_to(node.global_position)
 ```
 
@@ -4604,6 +7526,65 @@ func _remove_short_lines(text: String) -> String:
 + Verbosity good
 ```
 
+#### godot_dodo_4x_60k_starcoder_15b_3ep
+
+```gdscript
+func clean_lyrics(lyrics : String) -> String:
+        var cleaned := PackedStringArray()
+        for line in lyrics.split("\n"):
+                if line.length() >= 10:
+                        cleaned.append(line)
+        return "\n".join(cleaned)
+```
+
+```diff
++ Syntax correct
+
++ Functionality correct
+
++ Verbosity good
+```
+
+#### godot_dodo_4x_60k_starcoder_15b_2ep
+
+```gdscript
+func remove_useless_lines(lyrics : String) -> String:
+        var lines := lyrics.split("\n")
+        for line in lines.size():
+                if lines[line].length() < 10:
+                        lines.remove_at(line)
+        return "\n".join(PackedStringArray(lines))
+```
+
+```diff
++ Syntax correct
+
+- Functionality incorrect
+! For-loop fails after item has been removed due to out-of-range index
+
++ Verbosity good
+```
+
+#### godot_dodo_4x_60k_starcoder_15b_1ep
+
+```gdscript
+func clean_text(text: String) -> String:
+        var lines = text.split("\n")
+        for line in lines:
+                if line.length() < 10:
+                        lines.erase(line)
+        return "\n".join(lines)
+```
+
+```diff
+- Syntax incorrect
+! erase does not exist in PackedStringArray type
+
++ Functionality correct
+
++ Verbosity good
+```
+
 ---
 
 ### Enable SDFGI for the input environment.
@@ -4664,6 +7645,55 @@ func sdfgi_enable(environment):
 
 ```gdscript
 func _init_env(env: Environment) -> void:
+        env.sdfgi_enabled = true
+```
+
+```diff
++ Syntax correct
+
++ Functionality correct
+
++ Verbosity good
+```
+
+#### godot_dodo_4x_60k_starcoder_15b_3ep
+
+```gdscript
+func _get_description() -> String:
+        return "Enable SDFGI for the input environment"
+```
+
+```diff
++ Syntax correct
+
+- Functionality incorrect
+! Does not enable SDFGI
+
+- Verbosity bad
+! Makes no attempt to implement logic
+```
+
+#### godot_dodo_4x_60k_starcoder_15b_2ep
+
+```gdscript
+func _on_cb_global_illumination_toggled(button_pressed):
+        if button_pressed:
+                environment.sdfgi_enabled = true
+```
+
+```diff
++ Syntax correct
+
+- Functionality incorrect
+! Does not take input environment param
+
++ Verbosity good
+```
+
+#### godot_dodo_4x_60k_starcoder_15b_1ep
+
+```gdscript
+func enable_sdfgi(env: Environment) -> void:
         env.sdfgi_enabled = true
 ```
 
@@ -4744,4 +7774,51 @@ func _on_quit_button_pressed():
 + Functionality correct
 
 + Verbosity good
+```
+
+#### godot_dodo_4x_60k_starcoder_15b_3ep
+
+```gdscript
+func _on_exit_pressed():
+        get_tree().quit()
+```
+
+```diff
++ Syntax correct
+
++ Functionality correct
+
++ Verbosity good
+```
+
+#### godot_dodo_4x_60k_starcoder_15b_2ep
+
+```gdscript
+func _on_exit_button_pressed() -> void:
+        get_tree().quit()
+```
+
+```diff
++ Syntax correct
+
++ Functionality correct
+
++ Verbosity good
+```
+
+#### godot_dodo_4x_60k_starcoder_15b_1ep
+
+```gdscript
+func exit() -> void:
+```
+
+```diff
+- Syntax incorrect
+! No indented block after function definition
+
+- Functionality incorrect
+! Does not exit game
+
+- Verbosity bad
+! Makes no attempt to implement logic.
 ```
